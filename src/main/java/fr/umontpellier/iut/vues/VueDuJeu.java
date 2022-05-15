@@ -2,6 +2,7 @@ package fr.umontpellier.iut.vues;
 
 import fr.umontpellier.iut.IJeu;
 import fr.umontpellier.iut.rails.Destination;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
@@ -32,15 +33,19 @@ public class VueDuJeu extends VBox {
     private Button boutonPasser;
     private Label nomJoueurCourant;
 
+    private VBox listeDestinations;
+
     public VueDuJeu(IJeu jeu) {
         this.jeu = jeu;
         plateau = new VuePlateau();
 
         nomJoueurCourant = new Label();
         boutonPasser = new Button("Passer");
+        listeDestinations = new VBox();
 
         getChildren().add(nomJoueurCourant);
         getChildren().add(boutonPasser);
+        getChildren().add(listeDestinations);
         //getChildren().add(plateau);
     }
 
@@ -56,19 +61,16 @@ public class VueDuJeu extends VBox {
         });
 
         //Pioche des destinations initiales
-        destinationsInitialesListener = (elementChange) -> {
-            String nomDestination;
-            while(elementChange.next()) {
-                if (elementChange.wasRemoved()) {
+        destinationsInitialesListener = (elementChange) -> Platform.runLater(() -> {
+            while (elementChange.next()) {
+                if (elementChange.wasRemoved()) { //Peut-être devoir changer vers un wasAdded
                     List<? extends Destination> listeSuppressions = elementChange.getRemoved();
                     for (Destination destination : listeSuppressions) {
-                        nomDestination = destination.getNom();
-                        System.out.println(nomJoueurCourant.getText() + " a pioché " + nomDestination);
+                        listeDestinations.getChildren().add(new Label(destination.getNom()));
                     }
                 }
             }
-        };
+            });
         jeu.destinationsInitialesProperty().addListener(destinationsInitialesListener);
     }
-
 }
