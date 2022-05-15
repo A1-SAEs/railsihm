@@ -1,12 +1,16 @@
 package fr.umontpellier.iut.vues;
 
 import fr.umontpellier.iut.IJeu;
+import fr.umontpellier.iut.rails.Destination;
 import javafx.beans.value.ChangeListener;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+
+import java.util.List;
 
 /**
  * Cette classe correspond à la fenêtre principale de l'application.
@@ -24,6 +28,7 @@ public class VueDuJeu extends VBox {
 
     private EventHandler<ActionEvent> gestionnaireEvenement;
 
+    private ListChangeListener<Destination> destinationsInitialesListener;
     private Button boutonPasser;
     private Label nomJoueurCourant;
 
@@ -34,8 +39,8 @@ public class VueDuJeu extends VBox {
         nomJoueurCourant = new Label();
         boutonPasser = new Button("Passer");
 
-        getChildren().add(boutonPasser);
         getChildren().add(nomJoueurCourant);
+        getChildren().add(boutonPasser);
         //getChildren().add(plateau);
     }
 
@@ -44,10 +49,26 @@ public class VueDuJeu extends VBox {
     }
 
     public void creerBindings() {
+        //Bouton passer
         boutonPasser.setOnAction((event) -> {
             jeu.passerAEteChoisi();
             nomJoueurCourant.setText(jeu.joueurCourantProperty().getValue().getNom());
         });
+
+        //Pioche des destinations initiales
+        destinationsInitialesListener = (elementChange) -> {
+            String nomDestination;
+            while(elementChange.next()) {
+                if (elementChange.wasRemoved()) {
+                    List<? extends Destination> listeSuppressions = elementChange.getRemoved();
+                    for (Destination destination : listeSuppressions) {
+                        nomDestination = destination.getNom();
+                        System.out.println(nomJoueurCourant.getText() + " a pioché " + nomDestination);
+                    }
+                }
+            }
+        };
+        jeu.destinationsInitialesProperty().addListener(destinationsInitialesListener);
     }
 
 }
