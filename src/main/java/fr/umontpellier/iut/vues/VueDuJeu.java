@@ -39,6 +39,8 @@ public class VueDuJeu extends VBox {
 
     public VueDuJeu(IJeu jeu) {
         this.jeu = jeu;
+        this.setPrefSize(960, 540);
+
         vueJoueurCourant = new VueJoueurCourant();
         //plateau = new VuePlateau();
 
