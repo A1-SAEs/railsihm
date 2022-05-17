@@ -4,14 +4,12 @@ import fr.umontpellier.iut.IDestination;
 import fr.umontpellier.iut.IJeu;
 import fr.umontpellier.iut.rails.Destination;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -29,24 +27,25 @@ public class VueDuJeu extends VBox {
 
     private IJeu jeu;
     private VuePlateau plateau;
+    private VueJoueurCourant vueJoueurCourant;
 
     private EventHandler<ActionEvent> gestionnaireEvenement;
 
+    //Destinations initiales
     private ListChangeListener<Destination> destinationsInitialesListener;
-    private Button boutonPasser;
-    private Label nomJoueurCourant;
-
     private VBox listeDestinations;
+
+    private Button boutonPasser;
 
     public VueDuJeu(IJeu jeu) {
         this.jeu = jeu;
-        plateau = new VuePlateau();
+        vueJoueurCourant = new VueJoueurCourant();
+        //plateau = new VuePlateau();
 
-        nomJoueurCourant = new Label();
         boutonPasser = new Button("Passer");
         listeDestinations = new VBox();
 
-        getChildren().add(nomJoueurCourant);
+        getChildren().add(vueJoueurCourant);
         getChildren().add(boutonPasser);
         getChildren().add(listeDestinations);
         //getChildren().add(plateau);
@@ -60,13 +59,12 @@ public class VueDuJeu extends VBox {
         //Bouton passer
         boutonPasser.setOnAction((event) -> {
             jeu.passerAEteChoisi();
-            nomJoueurCourant.setText(jeu.joueurCourantProperty().getValue().getNom());
         });
 
         //Pioche des destinations initiales
         destinationsInitialesListener = (elementChange) -> Platform.runLater(() -> {
             while (elementChange.next()) {
-                if (elementChange.wasAdded()) { //Peut-être devoir changer vers un wasAdded
+                if (elementChange.wasAdded()) {
                     List<? extends Destination> listeAjouts = elementChange.getAddedSubList();
                     for (Destination destination : listeAjouts) {
                         listeDestinations.getChildren().add(new Label(destination.getNom()));
@@ -81,6 +79,9 @@ public class VueDuJeu extends VBox {
             }
             });
         jeu.destinationsInitialesProperty().addListener(destinationsInitialesListener);
+
+        //Création des liaisons dans la vue du joueur courant
+        vueJoueurCourant.creerBindings(this.getJeu());
     }
 
     //Recherche d'une destination en son label correspondant
