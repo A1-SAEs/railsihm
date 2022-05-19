@@ -7,9 +7,12 @@ import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.util.List;
@@ -23,7 +26,7 @@ import java.util.List;
  * (le joueur courant, les 5 cartes Wagons visibles, les destinations lors de l'étape d'initialisation de la partie, ...)
  * ainsi que les listeners à exécuter lorsque ces éléments changent
  */
-public class VueDuJeu extends VBox {
+public class VueDuJeu extends BorderPane {
 
     private IJeu jeu;
     private VuePlateau plateau;
@@ -37,9 +40,12 @@ public class VueDuJeu extends VBox {
 
     private Button boutonPasser;
 
+    private HBox bottom;
+
     public VueDuJeu(IJeu jeu) {
         this.jeu = jeu;
         this.setPrefSize(960, 540);
+        bottom = new HBox();
 
         vueJoueurCourant = new VueJoueurCourant();
         //plateau = new VuePlateau();
@@ -47,9 +53,12 @@ public class VueDuJeu extends VBox {
         boutonPasser = new Button("Passer");
         listeDestinations = new VBox();
 
-        getChildren().add(vueJoueurCourant);
-        getChildren().add(boutonPasser);
-        getChildren().add(listeDestinations);
+        bottom.getChildren().add(vueJoueurCourant);
+        bottom.getChildren().add(boutonPasser);
+
+        setLeft(listeDestinations);
+        setBottom(bottom);
+        bottom.setAlignment(Pos.CENTER);
         //getChildren().add(plateau);
     }
 
@@ -59,22 +68,20 @@ public class VueDuJeu extends VBox {
 
     public void creerBindings() {
         //Bouton passer
-        boutonPasser.setOnAction((event) -> {
-            jeu.passerAEteChoisi();
-        });
+        boutonPasser.setOnAction(event -> jeu.passerAEteChoisi());
 
         //Pioche des destinations initiales
-        destinationsInitialesListener = (elementChange) -> Platform.runLater(() -> {
+        destinationsInitialesListener = elementChange -> Platform.runLater(() -> {
             while (elementChange.next()) {
                 if (elementChange.wasAdded()) {
-                    List<? extends Destination> listeAjouts = elementChange.getAddedSubList();
-                    for (Destination destination : listeAjouts) {
+                    List<? extends IDestination> listeAjouts = elementChange.getAddedSubList();
+                    for (IDestination destination : listeAjouts) {
                         listeDestinations.getChildren().add(new Label(destination.getNom()));
                     }
                 }
                 if (elementChange.wasRemoved()){
-                    List<? extends Destination> listeSuppressions = elementChange.getRemoved();
-                    for(Destination destination : listeSuppressions){
+                    List<? extends IDestination> listeSuppressions = elementChange.getRemoved();
+                    for(IDestination destination : listeSuppressions){
                         listeDestinations.getChildren().remove(destinationVersLabel(destination));
                     }
                 }
