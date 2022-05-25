@@ -9,15 +9,19 @@ import fr.umontpellier.iut.rails.Destination;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -27,7 +31,9 @@ import java.util.List;
  */
 public class VueJoueurCourant extends HBox {
 
+    @FXML
     Label nomJoueur;
+
     HBox cartesJoueurCourant;
     VBox destinationsJoueurCourant;
     ChangeListener<IJoueur> changementJoueurCourantListener;
@@ -35,21 +41,28 @@ public class VueJoueurCourant extends HBox {
     IJoueur joueurCourant;
 
     public VueJoueurCourant(){
-        nomJoueur = new Label();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/joueurCourant.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         cartesJoueurCourant = new HBox();
         destinationsJoueurCourant = new VBox();
-        getChildren().add(destinationsJoueurCourant);
-        getChildren().add(cartesJoueurCourant);
-        getChildren().add(nomJoueur);
+        //getChildren().add(destinationsJoueurCourant);
+        //getChildren().add(cartesJoueurCourant);
+        //getChildren().add(nomJoueur);
     }
 
     public void creerBindings(IJeu jeu){
-        joueurCourant = jeu.getJoueurs().get(0);
+        //joueurCourant = jeu.getJoueurs().get(0);
 
         changementJoueurCourantListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {
-            joueurCourant = nouvelleValeur;
+            //joueurCourant = nouvelleValeur;
             nomJoueur.setText(nouvelleValeur.getNom());
-
+            System.out.println(((GridPane) nomJoueur.getParent()).getChildren());
             cartesJoueurCourant.getChildren().clear();
             for(CouleurWagon carteJoueur : nouvelleValeur.getCartesWagon()){
                 cartesJoueurCourant.getChildren().add(new Label(carteJoueur.name()));

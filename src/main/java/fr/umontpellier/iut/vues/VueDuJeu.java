@@ -29,7 +29,7 @@ import java.util.List;
  * (le joueur courant, les 5 cartes Wagons visibles, les destinations lors de l'étape d'initialisation de la partie, ...)
  * ainsi que les listeners à exécuter lorsque ces éléments changent
  */
-public class VueDuJeu extends BorderPane {
+public class VueDuJeu extends HBox {
 
     private IJeu jeu;
     private VuePlateau plateau;
@@ -45,8 +45,6 @@ public class VueDuJeu extends BorderPane {
 
     @FXML
     private Button boutonPasser;
-
-    private HBox bottom;
 
     public VueDuJeu(IJeu jeu) {
         try {
@@ -65,13 +63,6 @@ public class VueDuJeu extends BorderPane {
         boutonPasser = new Button("Passer");
         listeDestinations = new VBox();
 
-        //bottom.getChildren().add(vueJoueurCourant);
-        //bottom.getChildren().add(boutonPasser);
-
-        //setLeft(listeDestinations);
-        //setBottom(bottom);
-
-        //setPrefSize(960, 540);
         //getChildren().add(plateau);
     }
 
@@ -79,10 +70,12 @@ public class VueDuJeu extends BorderPane {
         return jeu;
     }
 
-    public void creerBindings() {
-        //Bouton passer
-        boutonPasser.setOnAction(event -> jeu.passerAEteChoisi());
+    @FXML
+    public void passer(){
+        jeu.passerAEteChoisi();
+    }
 
+    public void creerBindings() {
         //Pioche des destinations initiales
         destinationsInitialesListener = elementChange -> Platform.runLater(() -> {
             while (elementChange.next()) {
