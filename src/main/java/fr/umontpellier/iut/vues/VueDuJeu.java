@@ -7,6 +7,8 @@ import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -15,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -30,6 +33,8 @@ public class VueDuJeu extends BorderPane {
 
     private IJeu jeu;
     private VuePlateau plateau;
+
+    @FXML
     private VueJoueurCourant vueJoueurCourant;
 
     private EventHandler<ActionEvent> gestionnaireEvenement;
@@ -38,14 +43,21 @@ public class VueDuJeu extends BorderPane {
     private ListChangeListener<Destination> destinationsInitialesListener;
     private VBox listeDestinations;
 
+    @FXML
     private Button boutonPasser;
 
     private HBox bottom;
 
     public VueDuJeu(IJeu jeu) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/jeu.fxml"));
+            loader.setRoot(this);
+            loader.setController(this);
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.jeu = jeu;
-        this.setPrefSize(960, 540);
-        bottom = new HBox();
 
         vueJoueurCourant = new VueJoueurCourant();
         //plateau = new VuePlateau();
@@ -53,12 +65,13 @@ public class VueDuJeu extends BorderPane {
         boutonPasser = new Button("Passer");
         listeDestinations = new VBox();
 
-        bottom.getChildren().add(vueJoueurCourant);
-        bottom.getChildren().add(boutonPasser);
+        //bottom.getChildren().add(vueJoueurCourant);
+        //bottom.getChildren().add(boutonPasser);
 
-        setLeft(listeDestinations);
-        setBottom(bottom);
-        bottom.setAlignment(Pos.CENTER);
+        //setLeft(listeDestinations);
+        //setBottom(bottom);
+
+        //setPrefSize(960, 540);
         //getChildren().add(plateau);
     }
 

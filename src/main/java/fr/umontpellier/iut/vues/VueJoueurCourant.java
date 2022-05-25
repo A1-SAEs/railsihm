@@ -38,9 +38,9 @@ public class VueJoueurCourant extends HBox {
         nomJoueur = new Label();
         cartesJoueurCourant = new HBox();
         destinationsJoueurCourant = new VBox();
-        getChildren().add(nomJoueur);
-        getChildren().add(cartesJoueurCourant);
         getChildren().add(destinationsJoueurCourant);
+        getChildren().add(cartesJoueurCourant);
+        getChildren().add(nomJoueur);
     }
 
     public void creerBindings(IJeu jeu){
@@ -72,4 +72,6 @@ public class VueJoueurCourant extends HBox {
         }
         return null;
     }
+
+
 }
