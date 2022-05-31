@@ -67,6 +67,7 @@ public class VueAutresJoueurs extends GridPane {
         });
 
         jeu.joueurCourantProperty().addListener(changementAutresJoueursListener);
+
     }
 
 }
