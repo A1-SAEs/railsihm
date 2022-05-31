@@ -13,6 +13,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,10 +39,16 @@ public class VueDuJeu extends HBox {
     @FXML
     private VueJoueurCourant vueJoueurCourant;
 
+    @FXML
+    private VBox piocheVisible;
+
+
     private EventHandler<ActionEvent> gestionnaireEvenement;
 
     //Destinations initiales
     private ListChangeListener<Destination> destinationsInitialesListener;
+
+
     private VBox listeDestinations;
 
     @FXML
@@ -93,6 +101,7 @@ public class VueDuJeu extends HBox {
                 }
             }
             });
+
         jeu.destinationsInitialesProperty().addListener(destinationsInitialesListener);
 
         //Création des liaisons dans la vue du joueur courant

@@ -2,20 +2,66 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import fr.umontpellier.iut.vues.VueJoueurCourant?>
-<fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<!--<?import fr.umontpellier.iut.vues.VueJoueurCourant?>-->
+
+<fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="456.0" style="-fx-background-color: green;" HBox.hgrow="ALWAYS">
-         <bottom>
+      <BorderPane prefHeight="400.0" prefWidth="456.0" style="-fx-background-color: green; -fx-border-color: black;" HBox.hgrow="ALWAYS">
+         <!--<bottom>
             <VueJoueurCourant fx:id="vueJoueurCourant"/>
-         </bottom></BorderPane>
-      <VBox alignment="BOTTOM_CENTER" prefHeight="400.0" prefWidth="110.0" style="-fx-background-color: red;">
+         </bottom>--></BorderPane>
+      <VBox alignment="BOTTOM_CENTER" prefHeight="400.0" prefWidth="110.0" style="-fx-background-color: red; -fx-border-color: black;">
          <children>
+            <VBox fx:id="piocheVisible" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/cards/eu_WagonCard_back.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/cards/eu_WagonCard_back.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/cards/eu_WagonCard_back.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/cards/eu_WagonCard_back.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/cards/eu_WagonCard_back.png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+               </children>
+            </VBox>
             <Button fx:id="boutonPasser" mnemonicParsing="false" onMouseClicked="#passer" prefHeight="42.0" prefWidth="94.0" text="Passer">
                <VBox.margin>
                   <Insets bottom="10.0" />
