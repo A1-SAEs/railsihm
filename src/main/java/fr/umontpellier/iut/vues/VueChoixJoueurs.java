@@ -66,7 +66,7 @@ public class VueChoixJoueurs extends Stage {
      * Retourne le nombre de participants à la partie que l'utilisateur a renseigné
      */
     protected int getNombreDeJoueurs() {
-        throw new RuntimeException("Methode à implémenter");
+        return nomsJoueurs.size();
     }
 
     /**
@@ -74,7 +74,7 @@ public class VueChoixJoueurs extends Stage {
      * @param playerNumber : le numéro du participant
      */
     protected String getJoueurParNumero(int playerNumber) {
-        throw new RuntimeException("Methode à implémenter");
+        return nomsJoueurs.get(playerNumber);
     }
 
 }
