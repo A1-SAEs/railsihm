@@ -48,14 +48,69 @@ public class VuePlateau extends Pane {
     }
 
     private void bindRedimensionPlateau() {
-        /*bindRoutes();
+        bindRoutes();
         bindVilles();
-//        Les dimensions de l'image varient avec celle de la scène
+        //Les dimensions de l'image varient avec celle de la scène
         image.fitWidthProperty().bind(getScene().widthProperty());
-        image.fitHeightProperty().bind(getScene().heightProperty());*/
+        image.fitHeightProperty().bind(getScene().heightProperty());
     }
 
     private void bindRectangle(Rectangle rect, double layoutX, double layoutY) {
+        rect.layoutXProperty().bind(new DoubleBinding() {
+            {
+                super.bind(image.fitWidthProperty(), image.fitHeightProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return layoutX * image.getLayoutBounds().getWidth()/ DonneesPlateau.largeurInitialePlateau;
+            }
+        });
+        rect.layoutYProperty().bind(new DoubleBinding() {
+            {
+                super.bind(image.fitWidthProperty(), image.fitHeightProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return layoutY * image.getLayoutBounds().getHeight()/ DonneesPlateau.hauteurInitialePlateau;
+            }
+        });
+        rect.heightProperty().bind(new DoubleBinding() {
+            {
+                super.bind(image.fitWidthProperty(), image.fitHeightProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return DonneesPlateau.hauteurRectangle * image.getLayoutBounds().getHeight()/ DonneesPlateau.hauteurInitialePlateau;
+            }
+        });
+        rect.widthProperty().bind(new DoubleBinding() {
+            {
+                super.bind(image.fitWidthProperty(), image.fitHeightProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return DonneesPlateau.largeurRectangle * image.getLayoutBounds().getWidth()/ DonneesPlateau.largeurInitialePlateau;
+            }
+        });
+        rect.xProperty().bind(new DoubleBinding() {
+            {
+                super.bind(image.fitWidthProperty(), image.fitHeightProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return DonneesPlateau.xInitial * image.getLayoutBounds().getWidth()/ DonneesPlateau.largeurInitialePlateau;
+            }
+        });
+        rect.yProperty().bind(new DoubleBinding() {
+            {
+                super.bind(image.fitWidthProperty(), image.fitHeightProperty());
+            }
+            @Override
+            protected double computeValue() {
+                return DonneesPlateau.yInitial * image.getLayoutBounds().getHeight()/ DonneesPlateau.hauteurInitialePlateau;
+            }
+        });
+
 //        Liste des propriétés à lier
 //        rect.widthProperty()
 //        rect.heightProperty()
