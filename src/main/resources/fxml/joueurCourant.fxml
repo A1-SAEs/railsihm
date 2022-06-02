@@ -11,79 +11,79 @@
 
 <fx:root alignment="CENTER" prefHeight="100.0" prefWidth="200.0" type="HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="LOCOMOTIVE" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="ROSE" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="ROUGE" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="ORANGE" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="JAUNE" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="VERT" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="BLEU" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="BLANC" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-20.0" />
          </HBox.margin>
       </ImageView>
-      <ImageView fx:id="NOIR" fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
-            <Image url="@../images/cards/emplacement_vide.png" />
+            <Image url="@../images/cards/eu_WagonCard_back.png" />
          </image>
          <HBox.margin>
-            <Insets left="-10.0" />
+            <Insets right="-10.0" />
          </HBox.margin>
       </ImageView>
-      <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="157.0" prefWidth="288.0" style="-fx-background-color: C4C4C4; -fx-background-radius: 5;">
+      <GridPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="219.0" style="-fx-background-color: C4C4C4; -fx-background-radius: 5;">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="170.0" minWidth="10.0" prefWidth="118.0" />
             <ColumnConstraints hgrow="SOMETIMES" maxWidth="198.0" minWidth="10.0" prefWidth="162.0" />
@@ -100,10 +100,13 @@
             <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="nomJoueur" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 10;" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="TOP">
+            <Label fx:id="nomJoueur" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="75.0" style="-fx-background-color: E5E5E5; -fx-background-radius: 10;" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="TOP">
                <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                </padding>
+               <GridPane.margin>
+                  <Insets top="5.0" />
+               </GridPane.margin>
             </Label>
             <GridPane prefHeight="99.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <columnConstraints>
@@ -115,43 +118,8 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <ImageView fitHeight="75.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@../../../../ressources/images/images/image-wagon-ROUGE.png" />
-                     </image>
-                  </ImageView>
-                  <Label prefHeight="18.0" prefWidth="50.0" text="Wagons" GridPane.columnIndex="1" />
-                  <Label prefWidth="38.0" text="Score" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
-            <GridPane alignment="CENTER" prefHeight="70.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="62.0" minWidth="10.0" prefWidth="46.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="79.0" minWidth="10.0" prefWidth="44.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="116.0" minWidth="10.0" prefWidth="72.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <ImageView fitHeight="55.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" GridPane.valignment="CENTER">
-                     <image>
-                        <Image url="@../../../../ressources/images/images/gare-ROUGE.png" />
-                     </image>
-                     <GridPane.margin>
-                        <Insets left="5.0" />
-                     </GridPane.margin>
-                  </ImageView>
-                  <ImageView fitHeight="55.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-                     <image>
-                        <Image url="@../../../../ressources/images/images/gare-ROUGE.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="55.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-                     <image>
-                        <Image url="@../../../../ressources/images/images/gare-ROUGE.png" />
-                     </image>
-                  </ImageView>
+                  <Label fx:id="wagonJoueur" prefHeight="18.0" prefWidth="50.0" text="Wagons" GridPane.columnIndex="1" />
+                  <Label fx:id="scoreJoueur" prefWidth="38.0" text="Score" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

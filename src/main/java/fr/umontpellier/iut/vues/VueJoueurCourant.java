@@ -33,6 +33,10 @@ public class VueJoueurCourant extends HBox {
 
     @FXML
     Label nomJoueur;
+    @FXML
+    Label wagonJoueur;
+    @FXML
+    Label scoreJoueur;
 
     HBox cartesJoueurCourant;
     VBox destinationsJoueurCourant;
@@ -51,25 +55,28 @@ public class VueJoueurCourant extends HBox {
         }
         cartesJoueurCourant = new HBox();
         destinationsJoueurCourant = new VBox();
-        //getChildren().add(destinationsJoueurCourant);
-        //getChildren().add(cartesJoueurCourant);
-        //getChildren().add(nomJoueur);
     }
 
     public void creerBindings(IJeu jeu){
-        //joueurCourant = jeu.getJoueurs().get(0);
+        joueurCourant = jeu.getJoueurs().get(0);
 
         changementJoueurCourantListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {
-            //joueurCourant = nouvelleValeur;
+            joueurCourant = nouvelleValeur;
+            //Changement des labels du joueur
             nomJoueur.setText(nouvelleValeur.getNom());
-            System.out.println(((GridPane) nomJoueur.getParent()).getChildren());
+            wagonJoueur.setText(String.valueOf(nouvelleValeur.getNbWagons()));
+            scoreJoueur.setText(String.valueOf(nouvelleValeur.getScore()));
+
+            //Nettoyage des cartes et destinations du joueur précédent
             cartesJoueurCourant.getChildren().clear();
+
+            //Mise en place des cartes et destinations du joueur actuel
             for(CouleurWagon carteJoueur : nouvelleValeur.getCartesWagon()){
                 cartesJoueurCourant.getChildren().add(new Label(carteJoueur.name()));
             }
 
             destinationsJoueurCourant.getChildren().clear();
-            for(Destination destinationJoueur : nouvelleValeur.getDestinations()){
+            for(Destination destinationJoueur : nouvelleValeur.getDestinations()) {
                 destinationsJoueurCourant.getChildren().add(new Label(destinationJoueur.getNom()));
             }
         });
