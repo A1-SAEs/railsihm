@@ -7,18 +7,10 @@ import fr.umontpellier.iut.rails.CouleurWagon;
 import fr.umontpellier.iut.rails.Destination;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -38,20 +30,18 @@ public class VueDuJeu extends HBox {
 
     //Vues
     private IJeu jeu;
+    @FXML
     private VuePlateau plateau;
-
     @FXML
     private VueJoueurCourant vueJoueurCourant;
 
     //Conteneur pioche visible
-    private ListChangeListener<CouleurWagon> couleurWagonListChangeListener;
-
+    private ListChangeListener<CouleurWagon> piocheVisibleListener;
     @FXML
     private VBox piocheVisible;
 
-    //Destinations initiales
-    private ListChangeListener<Destination> destinationsInitialesListener;
-
+    //Choix des destinations
+    private ListChangeListener<Destination> choixDestinationsListener;
     @FXML
     private VBox destinationsInitiales;
 
@@ -70,8 +60,6 @@ public class VueDuJeu extends HBox {
         }
         this.jeu = jeu;
 
-        plateau = new VuePlateau();
-
         boutonPasser = new Button("Passer");
     }
 
@@ -85,10 +73,8 @@ public class VueDuJeu extends HBox {
     }
 
     public void creerBindings() {
-        plateau.creerBindings();
-
-        //Pioche des destinations initiales
-        destinationsInitialesListener = elementChange -> Platform.runLater(() -> {
+        //Pioche des destinations
+        choixDestinationsListener = elementChange -> Platform.runLater(() -> {
             while (elementChange.next()) {
                 if (elementChange.wasAdded()) {
                     List<? extends IDestination> listeAjouts = elementChange.getAddedSubList();
@@ -105,10 +91,30 @@ public class VueDuJeu extends HBox {
             }
             });
 
-        jeu.destinationsInitialesProperty().addListener(destinationsInitialesListener);
+        //Pioche des cartes visibles
+        piocheVisibleListener = elementChange -> Platform.runLater(() -> {
+            while (elementChange.next()) {
+                if (elementChange.wasAdded()) {
+                    List<? extends ICouleurWagon> listeAjouts = elementChange.getAddedSubList();
+                    for(ICouleurWagon carte : listeAjouts){
+                        piocheVisible.getChildren().add(new VueCarteWagon(carte));
+                    }
+                }
+                if (elementChange.wasRemoved()){
+                    List<? extends ICouleurWagon> listeSuppressions = elementChange.getRemoved();
+                    for(ICouleurWagon carte : listeSuppressions){
+                        piocheVisible.getChildren().remove(carteVersVue(carte));
+                    }
+                }
+            }
+        });
+
+        jeu.destinationsInitialesProperty().addListener(choixDestinationsListener);
+        jeu.cartesWagonVisiblesProperty().addListener(piocheVisibleListener);
 
         //Création des liaisons dans la vue du joueur courant
         vueJoueurCourant.creerBindings(this.getJeu());
+        plateau.creerBindings();
     }
 
     //Recherche d'une destination en sa vue correspondante
@@ -116,6 +122,15 @@ public class VueDuJeu extends HBox {
         for(Node vueDestination : destinationsInitiales.getChildren()){
             if(((VueDestination) vueDestination).getDestination().equals(destination)){
                 return (VueDestination) vueDestination;
+            }
+        }
+        return null;
+    }
+
+    public VueCarteWagon carteVersVue(ICouleurWagon carte){
+        for(Node vueCarteWagon : piocheVisible.getChildren()){
+            if(((VueCarteWagon) vueCarteWagon).getCouleurWagon().equals(carte)){
+                return (VueCarteWagon) vueCarteWagon;
             }
         }
         return null;
