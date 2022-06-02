@@ -1,7 +1,9 @@
 package fr.umontpellier.iut.vues;
 
+import fr.umontpellier.iut.ICouleurWagon;
 import fr.umontpellier.iut.IDestination;
 import fr.umontpellier.iut.IJeu;
+import fr.umontpellier.iut.rails.CouleurWagon;
 import fr.umontpellier.iut.rails.Destination;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
@@ -16,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -33,24 +36,26 @@ import java.util.List;
  */
 public class VueDuJeu extends HBox {
 
+    //Vues
     private IJeu jeu;
     private VuePlateau plateau;
 
     @FXML
     private VueJoueurCourant vueJoueurCourant;
 
+    //Conteneur pioche visible
+    private ListChangeListener<CouleurWagon> couleurWagonListChangeListener;
+
     @FXML
     private VBox piocheVisible;
-
-
-    private EventHandler<ActionEvent> gestionnaireEvenement;
 
     //Destinations initiales
     private ListChangeListener<Destination> destinationsInitialesListener;
 
+    @FXML
+    private VBox destinationsInitiales;
 
-    private VBox listeDestinations;
-
+    //Bouton passer tour
     @FXML
     private Button boutonPasser;
 
@@ -65,13 +70,9 @@ public class VueDuJeu extends HBox {
         }
         this.jeu = jeu;
 
-        vueJoueurCourant = new VueJoueurCourant();
-        //plateau = new VuePlateau();
+        plateau = new VuePlateau();
 
         boutonPasser = new Button("Passer");
-        listeDestinations = new VBox();
-
-        //getChildren().add(plateau);
     }
 
     public IJeu getJeu() {
@@ -84,19 +85,21 @@ public class VueDuJeu extends HBox {
     }
 
     public void creerBindings() {
+        plateau.creerBindings();
+
         //Pioche des destinations initiales
         destinationsInitialesListener = elementChange -> Platform.runLater(() -> {
             while (elementChange.next()) {
                 if (elementChange.wasAdded()) {
                     List<? extends IDestination> listeAjouts = elementChange.getAddedSubList();
-                    for (IDestination destination : listeAjouts) {
-                        listeDestinations.getChildren().add(new Label(destination.getNom()));
+                    for(IDestination destination : listeAjouts){
+                        destinationsInitiales.getChildren().add(new VueDestination(destination));
                     }
                 }
                 if (elementChange.wasRemoved()){
                     List<? extends IDestination> listeSuppressions = elementChange.getRemoved();
                     for(IDestination destination : listeSuppressions){
-                        listeDestinations.getChildren().remove(destinationVersLabel(destination));
+                        destinationsInitiales.getChildren().remove(destinationVersVue(destination));
                     }
                 }
             }
@@ -108,11 +111,11 @@ public class VueDuJeu extends HBox {
         vueJoueurCourant.creerBindings(this.getJeu());
     }
 
-    //Recherche d'une destination en son label correspondant
-    public Label destinationVersLabel(IDestination destination){
-        for(Node label : listeDestinations.getChildren()){
-            if(((Label) label).getText().equals(destination.getNom())){
-                return (Label) label;
+    //Recherche d'une destination en sa vue correspondante
+    public VueDestination destinationVersVue(IDestination destination){
+        for(Node vueDestination : destinationsInitiales.getChildren()){
+            if(((VueDestination) vueDestination).getDestination().equals(destination)){
+                return (VueDestination) vueDestination;
             }
         }
         return null;
