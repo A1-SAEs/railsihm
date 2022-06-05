@@ -6,11 +6,13 @@ import fr.umontpellier.iut.IJeu;
 import fr.umontpellier.iut.rails.CouleurWagon;
 import fr.umontpellier.iut.rails.Destination;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -34,6 +36,11 @@ public class VueDuJeu extends HBox {
     private VuePlateau plateau;
     @FXML
     private VueJoueurCourant vueJoueurCourant;
+
+    //Instructions
+    private ChangeListener<String> instructionsListener;
+    @FXML
+    Label instructions;
 
     //Conteneur pioche visible
     private ListChangeListener<CouleurWagon> piocheVisibleListener;
@@ -72,6 +79,12 @@ public class VueDuJeu extends HBox {
         jeu.passerAEteChoisi();
     }
 
+    @FXML
+    public void piocherDestination(){ jeu.uneDestinationAEtePiochee();}
+
+    @FXML
+    public void piocherCarte(){ jeu.uneCarteWagonAEtePiochee();}
+
     public void creerBindings() {
         //Pioche des destinations
         choixDestinationsListener = elementChange -> Platform.runLater(() -> {
@@ -108,7 +121,11 @@ public class VueDuJeu extends HBox {
                 }
             }
         });
+        instructionsListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {
+            instructions.setText(nouvelleValeur);
+        });
 
+        jeu.instructionProperty().addListener(instructionsListener);
         jeu.destinationsInitialesProperty().addListener(choixDestinationsListener);
         jeu.cartesWagonVisiblesProperty().addListener(piocheVisibleListener);
 

@@ -26,11 +26,4 @@ public class VueCarteWagon extends ImageView {
     public ICouleurWagon getCouleurWagon() {
         return couleurWagon;
     }
-
-    public void creerBindings(){
-        bindRedimensionCarte();
-    }
-
-    public void bindRedimensionCarte(){
-    }
 }

@@ -2,15 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <?import fr.umontpellier.iut.vues.VueJoueurCourant?>
-<!--<?import fr.umontpellier.iut.vues.VuePlateau?>-->
+<?import fr.umontpellier.iut.vues.VuePlateau?>
 
-<fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<?import com.sun.javafx.charts.Legend?>
+<?import javafx.scene.control.Label?>
+<fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="456.0" style="-fx-background-color: white; -fx-border-color: black;" HBox.hgrow="ALWAYS">
          <left>
@@ -21,32 +24,36 @@
             </VBox>
          </left>
          <bottom>
-            <VueJoueurCourant fx:id="vueJoueurCourant"/>
-         </bottom>
-         <!--<center>
+            <VBox prefHeight="97.0" prefWidth="488.0" BorderPane.alignment="CENTER" />
+            <children>
+               <Label fx:id="instructions"/>
+               <VueJoueurCourant fx:id="vueJoueurCourant"/>
+            </children></bottom>
+         <center>
             <VuePlateau fx:id="plateau"/>
-         </center>--></BorderPane>
+         </center></BorderPane>
       <VBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="110.0" style="-fx-background-color: red; -fx-border-color: black;">
          <children>
-            <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="43.0" fitWidth="85.0" onMouseClicked="#piocherCarte" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
                   <Insets right="2.0" />
                </VBox.margin>
-            </ImageView>
-            <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-               <VBox.margin>
-                  <Insets right="2.0" />
-               </VBox.margin>
+               <image>
+                  <Image url="@../images/cartesWagons/carte-wagon.png" />
+               </image>
             </ImageView>
             <VBox fx:id="piocheVisible" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="100.0">
                <padding>
                   <Insets right="21.0" />
                </padding>
             </VBox>
-            <ImageView fitHeight="43.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="43.0" fitWidth="85.0" onMouseClicked="#piocherDestination" pickOnBounds="true" preserveRatio="true">
                <VBox.margin>
                   <Insets bottom="5.0" />
                </VBox.margin>
+               <image>
+                  <Image url="@../images/missions/eu_TicketBack.png" />
+               </image>
             </ImageView>
             <Button fx:id="boutonPasser" mnemonicParsing="false" onMouseClicked="#passer" prefHeight="42.0" prefWidth="94.0" text="Passer">
                <VBox.margin>
