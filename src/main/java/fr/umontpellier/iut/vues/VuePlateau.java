@@ -110,14 +110,6 @@ public class VuePlateau extends Pane {
                 return DonneesPlateau.yInitial * image.getLayoutBounds().getHeight()/ DonneesPlateau.hauteurInitialePlateau;
             }
         });
-
-//        Liste des propriétés à lier
-//        rect.widthProperty()
-//        rect.heightProperty()
-//        rect.layoutXProperty()
-//        rect.xProperty()
-//        rect.layoutYProperty()
-//        rect.yProperty()
     }
 
     private void bindRoutes() {

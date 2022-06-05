@@ -114,7 +114,7 @@ public class VueDuJeu extends HBox {
 
         //Création des liaisons dans la vue du joueur courant
         vueJoueurCourant.creerBindings(this.getJeu());
-        plateau.creerBindings();
+        //plateau.creerBindings();
     }
 
     //Recherche d'une destination en sa vue correspondante

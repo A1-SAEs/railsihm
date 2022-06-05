@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
  *
  * On y définit le listener à exécuter lorsque cette carte a été choisie par l'utilisateur
  */
-public class VueCarteWagon extends Button {
+public class VueCarteWagon extends ImageView {
 
     private ICouleurWagon couleurWagon;
 
@@ -20,11 +20,17 @@ public class VueCarteWagon extends Button {
         this.setOnMouseClicked(event -> {
             ((VueDuJeu) getScene().getRoot()).getJeu().uneCarteWagonAEteChoisie(couleurWagon);
         });
-        setGraphic(new ImageView("images/cartesWagons/carte-wagon-" + couleurWagon + ".png"));
+        setImage(new Image("images/cartesWagons/carte-wagon-" + couleurWagon + ".png"));
     }
 
     public ICouleurWagon getCouleurWagon() {
         return couleurWagon;
     }
 
+    public void creerBindings(){
+        bindRedimensionCarte();
+    }
+
+    public void bindRedimensionCarte(){
+    }
 }
