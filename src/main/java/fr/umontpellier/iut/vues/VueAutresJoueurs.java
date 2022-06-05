@@ -1,5 +1,6 @@
 package fr.umontpellier.iut.vues;
 
+import fr.umontpellier.iut.IDestination;
 import fr.umontpellier.iut.IJeu;
 import fr.umontpellier.iut.IJoueur;
 import fr.umontpellier.iut.rails.CouleurWagon;
@@ -9,9 +10,12 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import javafx.beans.value.ChangeListener;
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
 
@@ -28,6 +32,7 @@ import java.util.List;
  * On y définit les bindings sur le joueur courant, ainsi que le listener à exécuter lorsque ce joueur change
  */
 public class VueAutresJoueurs extends GridPane {
+    //labels à afficher
     @FXML
     private Label nomJoueur;
 
@@ -37,13 +42,24 @@ public class VueAutresJoueurs extends GridPane {
     @FXML
     private Label wagon;
 
-    private VBox autresJoueursBox;
-    private List<Integer> nbWagon;
-    private List<Integer> nbScore;
-    private List<Integer> nbGare;
+    @FXML
+    private Label gare;
 
-    ChangeListener<List<IJoueur>> changementAutresJoueursListener;
-    List<IJoueur> autresJoueurs;
+    //images à afficher
+    @FXML
+    ImageView imageJoueur;
+    @FXML
+    ImageView imageWagons;
+    @FXML
+    ImageView imageGares;
+    @FXML
+    ImageView imageScore;
+
+    private GridPane autreJoueurGrid;
+
+
+    private ListChangeListener<IJoueur> changementAutresJoueursListener;
+    private IJoueur autreJoueur;
 
     public VueAutresJoueurs() {
         try {
@@ -55,36 +71,32 @@ public class VueAutresJoueurs extends GridPane {
             e.printStackTrace();
         }
 
-        this.autresJoueursBox = new VBox();
-        this.nbWagon = new ArrayList<>();
-        this.nbScore = new ArrayList<>();
-        this.nbGare = new ArrayList<>();
-        this.autresJoueurs = new ArrayList<>();
+        this.autreJoueurGrid = new GridPane();
     }
 
     public void creerBindings(IJeu jeu){
-        autresJoueurs.addAll(jeu.getJoueurs());
-        autresJoueurs.remove(0);
+        changementAutresJoueursListener = elementChange -> Platform.runLater(() -> {
+            while (elementChange.next()) {
+                if (elementChange.wasUpdated()) {
+                    List<? extends IJoueur> listeUpdate = elementChange.getList();
+                    for(IJoueur joueur : listeUpdate){
+                        nomJoueur.setText(joueur.getNom());
+                        wagon.setText(String.valueOf(joueur.getNbWagons()));
+                        score.setText(String.valueOf(joueur.getScore()));
+                        gare.setText(String.valueOf(joueur.getNbGares()));
 
-        changementAutresJoueursListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {
-            autresJoueurs = nouvelleValeur;
-            for(IJoueur joueur: autresJoueurs){
-                //nom
-                nbWagon.add(joueur.getNbWagons());
-                nbScore.add(joueur.getScore());
-                nbGare.add(joueur.getNbGares());
+                        imageJoueur.setImage(new Image("images/images/avatar-"+ joueur.getCouleur() + ".png"));
+                        imageGares.setImage(new Image("images/gares/gare-" + joueur.getCouleur() + ".png"));
+                        imageWagons.setImage(new Image("images/wagons/image-wagon-" + joueur.getCouleur() + ".png"));
+
+                    }
+                }
+
             }
-            /*
-            nomJoueur.setText(nouvelleValeur.getNom());
-            nbWagon.setValue(nouvelleValeur.getNbWagons());
-            nbScore.setValue(nouvelleValeur.getScore());
-            nbGare.setValue(nouvelleValeur.getNbGares());
-            wagon.setText(nbWagon.toString());
-            score.setText(nbScore.toString());
-            */
         });
 
-        //jeu.joueurCourantProperty().addListener(changementAutresJoueursListener);
+
+        jeu.joueurCourantProperty().addListener(changementAutresJoueursListener);
 
     }
 
