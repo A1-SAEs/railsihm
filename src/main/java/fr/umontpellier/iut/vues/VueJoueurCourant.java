@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -31,12 +32,25 @@ import java.util.List;
  */
 public class VueJoueurCourant extends HBox {
 
+    //Affichages labels
     @FXML
     Label nomJoueur;
     @FXML
     Label wagonJoueur;
     @FXML
     Label scoreJoueur;
+    @FXML
+    Label garesJoueur;
+
+    //Affichages images
+    @FXML
+    ImageView imageJoueur;
+    @FXML
+    ImageView imageWagons;
+    @FXML
+    ImageView imageGares;
+    @FXML
+    ImageView imageScore;
 
     HBox cartesJoueurCourant;
     VBox destinationsJoueurCourant;
@@ -66,6 +80,13 @@ public class VueJoueurCourant extends HBox {
             nomJoueur.setText(nouvelleValeur.getNom());
             wagonJoueur.setText(String.valueOf(nouvelleValeur.getNbWagons()));
             scoreJoueur.setText(String.valueOf(nouvelleValeur.getScore()));
+            garesJoueur.setText(String.valueOf(nouvelleValeur.getNbGares()));
+
+            //Changement des images
+            imageJoueur.setImage(new Image("images/images/avatar-"+ nouvelleValeur.getCouleur() + ".png"));
+            imageGares.setImage(new Image("images/gares/gare-" + nouvelleValeur.getCouleur() + ".png"));
+            imageWagons.setImage(new Image("images/wagons/image-wagon-" + nouvelleValeur.getCouleur() + ".png"));
+            //imageScore.setImage(new Image());
 
             //Nettoyage des cartes et destinations du joueur précédent
             cartesJoueurCourant.getChildren().clear();
