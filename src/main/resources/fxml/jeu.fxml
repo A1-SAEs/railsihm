@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import com.sun.javafx.charts.Legend?>
+<?import javafx.scene.control.Label?>
 
 <?import fr.umontpellier.iut.vues.VueJoueurCourant?>
 <?import fr.umontpellier.iut.vues.VuePlateau?>
 
-<?import com.sun.javafx.charts.Legend?>
-<?import javafx.scene.control.Label?>
 <fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="456.0" style="-fx-background-color: white; -fx-border-color: black;" HBox.hgrow="ALWAYS">
@@ -24,7 +24,7 @@
             </VBox>
          </left>
          <bottom>
-            <VBox prefHeight="97.0" prefWidth="488.0" BorderPane.alignment="CENTER" />
+            <VBox alignment="CENTER" prefHeight="97.0" prefWidth="488.0" BorderPane.alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-border-color: black;"/>
             <children>
                <Label fx:id="instructions"/>
                <VueJoueurCourant fx:id="vueJoueurCourant"/>
