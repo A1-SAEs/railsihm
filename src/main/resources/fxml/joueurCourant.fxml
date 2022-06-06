@@ -20,13 +20,17 @@
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <ImageView fx:id="imageWagons" fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageGares" fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="imageScore" fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label text="Score">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Label>
                </children></VBox>
-            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label fx:id="wagonJoueur" prefHeight="18.0" prefWidth="50.0" text="Wagons">
                      <VBox.margin>
@@ -35,12 +39,12 @@
                   </Label>
                   <Label fx:id="garesJoueur" prefWidth="38.0" text="Gares">
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                   <Label fx:id="scoreJoueur" prefWidth="38.0" text="Score">
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets top="25.0" />
                      </VBox.margin>
                   </Label>
                </children>

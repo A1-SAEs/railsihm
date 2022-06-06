@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -36,13 +37,20 @@ public class VueDuJeu extends HBox {
     private VuePlateau plateau;
     @FXML
     private VueJoueurCourant vueJoueurCourant;
+    @FXML
+    private VueAutresJoueurs vueAutresJoueurs;
 
     //Instructions
     private ChangeListener<String> instructionsListener;
     @FXML
     Label instructions;
+    //Pioches
+    @FXML
+    ImageView piocheCarte;
+    @FXML
+    ImageView piocheDestination;
 
-    //Conteneur pioche visible
+    //Pioche visible
     private ListChangeListener<CouleurWagon> piocheVisibleListener;
     @FXML
     private VBox piocheVisible;
@@ -110,7 +118,11 @@ public class VueDuJeu extends HBox {
                 if (elementChange.wasAdded()) {
                     List<? extends ICouleurWagon> listeAjouts = elementChange.getAddedSubList();
                     for(ICouleurWagon carte : listeAjouts){
-                        piocheVisible.getChildren().add(new VueCarteWagon(carte));
+                        VueCarteWagon vueCarte = new VueCarteWagon(carte);
+                        piocheVisible.getChildren().add(vueCarte);
+                        vueCarte.creerBindings();
+                        piocheDestination.setVisible(true);
+                        piocheCarte.setVisible(true);
                     }
                 }
                 if (elementChange.wasRemoved()){
@@ -129,9 +141,15 @@ public class VueDuJeu extends HBox {
         jeu.destinationsInitialesProperty().addListener(choixDestinationsListener);
         jeu.cartesWagonVisiblesProperty().addListener(piocheVisibleListener);
 
-        //Création des liaisons dans la vue du joueur courant
+        //Création des bindings
         vueJoueurCourant.creerBindings(this.getJeu());
         //plateau.creerBindings();
+        //vueAutresJoueurs.creerBindings(this.getJeu());
+
+        piocheCarte.setPreserveRatio(true);
+        piocheDestination.setPreserveRatio(true);
+        piocheCarte.fitWidthProperty().bind(piocheVisible.prefWidthProperty());
+        piocheDestination.fitWidthProperty().bind(piocheVisible.prefWidthProperty());
     }
 
     //Recherche d'une destination en sa vue correspondante

@@ -6,6 +6,7 @@ import fr.umontpellier.iut.IJoueur;
 import fr.umontpellier.iut.rails.CouleurWagon;
 import fr.umontpellier.iut.rails.Destination;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -31,7 +32,7 @@ import java.util.List;
  *
  * On y définit les bindings sur le joueur courant, ainsi que le listener à exécuter lorsque ce joueur change
  */
-public class VueAutresJoueurs extends GridPane {
+public class VueAutresJoueurs extends VBox {
     //labels à afficher
     @FXML
     private Label nomJoueur;
@@ -55,23 +56,18 @@ public class VueAutresJoueurs extends GridPane {
     @FXML
     ImageView imageScore;
 
-    private GridPane autreJoueurGrid;
-
-
     private ListChangeListener<IJoueur> changementAutresJoueursListener;
     private IJoueur autreJoueur;
 
     public VueAutresJoueurs() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/jeu.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/autresJoueurs.fxml"));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        this.autreJoueurGrid = new GridPane();
     }
 
     public void creerBindings(IJeu jeu){
@@ -95,9 +91,7 @@ public class VueAutresJoueurs extends GridPane {
             }
         });
 
-
-        jeu.joueurCourantProperty().addListener(changementAutresJoueursListener);
-
+        //jeu.joueurCourantProperty().addListener(changementAutresJoueursListener);
     }
 
 }

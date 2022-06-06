@@ -52,10 +52,15 @@ public class VueJoueurCourant extends HBox {
     @FXML
     ImageView imageScore;
 
-    HBox cartesJoueurCourant;
-    VBox destinationsJoueurCourant;
+    //Conteneurs de cartes
+    //HBox cartesJoueurCourant;
+    //VBox destinationsJoueurCourant;
+
+    //Listeners
     ChangeListener<IJoueur> changementJoueurCourantListener;
     ChangeListener<ICouleurWagon> changementCartesJoueursListener;
+
+    //Joueur
     IJoueur joueurCourant;
 
     public VueJoueurCourant(){
@@ -67,8 +72,6 @@ public class VueJoueurCourant extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        cartesJoueurCourant = new HBox();
-        destinationsJoueurCourant = new VBox();
     }
 
     public void creerBindings(IJeu jeu){
@@ -89,7 +92,7 @@ public class VueJoueurCourant extends HBox {
             //imageScore.setImage(new Image());
 
             //Nettoyage des cartes et destinations du joueur précédent
-            cartesJoueurCourant.getChildren().clear();
+            /*cartesJoueurCourant.getChildren().clear();
 
             //Mise en place des cartes et destinations du joueur actuel
             for(CouleurWagon carteJoueur : nouvelleValeur.getCartesWagon()){
@@ -99,20 +102,9 @@ public class VueJoueurCourant extends HBox {
             destinationsJoueurCourant.getChildren().clear();
             for(Destination destinationJoueur : nouvelleValeur.getDestinations()) {
                 destinationsJoueurCourant.getChildren().add(new Label(destinationJoueur.getNom()));
-            }
+            }*/
         });
 
         jeu.joueurCourantProperty().addListener(changementJoueurCourantListener);
     }
-
-    public Label carteVersLabel(CouleurWagon couleur){
-        for(Node label : cartesJoueurCourant.getChildren()){
-            if(((Label) label).getText().equals(couleur.toString())){
-                return (Label) label;
-            }
-        }
-        return null;
-    }
-
-
 }
