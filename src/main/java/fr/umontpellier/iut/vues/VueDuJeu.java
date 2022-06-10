@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -22,14 +23,23 @@ import java.util.List;
 
 /**
  * Cette classe correspond à la fenêtre principale de l'application.
- *
+ * <p>
  * Elle est initialisée avec une référence sur la partie en cours (Jeu).
- *
+ * <p>
  * On y définit les bindings sur les éléments internes qui peuvent changer
  * (le joueur courant, les 5 cartes Wagons visibles, les destinations lors de l'étape d'initialisation de la partie, ...)
  * ainsi que les listeners à exécuter lorsque ces éléments changent
  */
 public class VueDuJeu extends HBox {
+    //Conteneurs du jeu
+    @FXML
+    VBox conteneurPioches;
+    @FXML
+    VBox conteneurAutresJoueurs;
+    @FXML
+    VBox conteneurJoueurCourant;
+    @FXML
+    Pane conteneurPlateau;
 
     //Vues
     private IJeu jeu;
@@ -44,6 +54,7 @@ public class VueDuJeu extends HBox {
     private ChangeListener<String> instructionsListener;
     @FXML
     Label instructions;
+
     //Pioches
     @FXML
     ImageView piocheCarte;
@@ -99,25 +110,27 @@ public class VueDuJeu extends HBox {
             while (elementChange.next()) {
                 if (elementChange.wasAdded()) {
                     List<? extends IDestination> listeAjouts = elementChange.getAddedSubList();
-                    for(IDestination destination : listeAjouts){
-                        destinationsInitiales.getChildren().add(new VueDestination(destination));
+                    for (IDestination destination : listeAjouts) {
+                        VueDestination vueDestination = new VueDestination(destination);
+                        destinationsInitiales.getChildren().add(vueDestination);
+                        vueDestination.creerBindings();
                     }
                 }
-                if (elementChange.wasRemoved()){
+                if (elementChange.wasRemoved()) {
                     List<? extends IDestination> listeSuppressions = elementChange.getRemoved();
-                    for(IDestination destination : listeSuppressions){
+                    for(IDestination destination : listeSuppressions) {
                         destinationsInitiales.getChildren().remove(destinationVersVue(destination));
                     }
                 }
             }
-            });
+        });
 
         //Pioche des cartes visibles
         piocheVisibleListener = elementChange -> Platform.runLater(() -> {
             while (elementChange.next()) {
                 if (elementChange.wasAdded()) {
                     List<? extends ICouleurWagon> listeAjouts = elementChange.getAddedSubList();
-                    for(ICouleurWagon carte : listeAjouts){
+                    for (ICouleurWagon carte : listeAjouts) {
                         VueCarteWagon vueCarte = new VueCarteWagon(carte);
                         piocheVisible.getChildren().add(vueCarte);
                         vueCarte.creerBindings();
@@ -125,10 +138,14 @@ public class VueDuJeu extends HBox {
                         piocheCarte.setVisible(true);
                     }
                 }
-                if (elementChange.wasRemoved()){
+                if (elementChange.wasRemoved()) {
                     List<? extends ICouleurWagon> listeSuppressions = elementChange.getRemoved();
-                    for(ICouleurWagon carte : listeSuppressions){
-                        piocheVisible.getChildren().remove(carteVersVue(carte));
+                    if (listeSuppressions.size() == 5) {
+                        piocheVisible.getChildren().clear();
+                    } else {
+                        for (ICouleurWagon carte : listeSuppressions) {
+                            piocheVisible.getChildren().remove(carteVersVue(carte));
+                        }
                     }
                 }
             }
@@ -142,32 +159,53 @@ public class VueDuJeu extends HBox {
         jeu.cartesWagonVisiblesProperty().addListener(piocheVisibleListener);
 
         //Création des bindings
-        vueJoueurCourant.creerBindings(this.getJeu());
-        //plateau.creerBindings();
         //vueAutresJoueurs.creerBindings(this.getJeu());
-
-        piocheCarte.setPreserveRatio(true);
-        piocheDestination.setPreserveRatio(true);
-        piocheCarte.fitWidthProperty().bind(piocheVisible.prefWidthProperty());
-        piocheDestination.fitWidthProperty().bind(piocheVisible.prefWidthProperty());
+        plateau.creerBindings();
+        vueJoueurCourant.creerBindings(this.getJeu());
     }
 
     //Recherche d'une destination en sa vue correspondante
-    public VueDestination destinationVersVue(IDestination destination){
-        for(Node vueDestination : destinationsInitiales.getChildren()){
-            if(((VueDestination) vueDestination).getDestination().equals(destination)){
+    public VueDestination destinationVersVue(IDestination destination) {
+        for (Node vueDestination : destinationsInitiales.getChildren()) {
+            if (((VueDestination) vueDestination).getDestination().equals(destination)) {
                 return (VueDestination) vueDestination;
             }
         }
         return null;
     }
 
-    public VueCarteWagon carteVersVue(ICouleurWagon carte){
-        for(Node vueCarteWagon : piocheVisible.getChildren()){
-            if(((VueCarteWagon) vueCarteWagon).getCouleurWagon().equals(carte)){
+    public VueCarteWagon carteVersVue(ICouleurWagon carte) {
+        for (Node vueCarteWagon : piocheVisible.getChildren()) {
+            if (((VueCarteWagon) vueCarteWagon).getCouleurWagon().equals(carte)) {
                 return (VueCarteWagon) vueCarteWagon;
             }
         }
         return null;
+    }
+
+    public void bindTailles() {
+
+        prefHeightProperty().bind(getScene().getWindow().heightProperty());
+        prefWidthProperty().bind(getScene().getWindow().widthProperty());
+
+        conteneurPlateau.prefWidthProperty().bind(prefWidthProperty().multiply(0.68));
+        conteneurPlateau.prefHeightProperty().bind(prefHeightProperty().multiply(0.8));
+
+        conteneurPioches.prefWidthProperty().bind(prefWidthProperty().multiply(0.15));
+        conteneurPioches.prefHeightProperty().bind(prefHeightProperty());
+
+        piocheCarte.setPreserveRatio(true);
+        piocheCarte.fitWidthProperty().bind(conteneurPioches.prefWidthProperty().divide(2));
+        piocheDestination.fitWidthProperty().bind(conteneurPioches.prefWidthProperty().divide(2));
+        piocheDestination.setPreserveRatio(true);
+        piocheVisible.prefWidthProperty().bind(conteneurPioches.prefWidthProperty());
+
+        conteneurAutresJoueurs.prefWidthProperty().bind(prefWidthProperty().multiply(0.17));
+        conteneurAutresJoueurs.prefHeightProperty().bind(prefHeightProperty().multiply(0.8));
+
+        conteneurJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.85));
+        conteneurJoueurCourant.prefHeightProperty().bind(prefHeightProperty().multiply(0.2));
+
+        destinationsInitiales.prefWidthProperty().bind(conteneurAutresJoueurs.prefWidthProperty());
     }
 }

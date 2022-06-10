@@ -1,10 +1,9 @@
 package fr.umontpellier.iut.vues;
 
 import fr.umontpellier.iut.IDestination;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 /**
  * Cette classe représente la vue d'une carte Destination.
@@ -25,5 +24,10 @@ public class VueDestination extends ImageView {
 
     public IDestination getDestination() {
         return destination;
+    }
+
+    public void creerBindings(){
+        setPreserveRatio(true);
+        fitWidthProperty().bind(((VBox) getParent()).prefWidthProperty().divide(2));
     }
 }

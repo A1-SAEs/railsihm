@@ -33,65 +33,16 @@ import java.util.List;
  * On y définit les bindings sur le joueur courant, ainsi que le listener à exécuter lorsque ce joueur change
  */
 public class VueAutresJoueurs extends VBox {
-    //labels à afficher
-    @FXML
-    private Label nomJoueur;
 
-    @FXML
-    private Label score;
-
-    @FXML
-    private Label wagon;
-
-    @FXML
-    private Label gare;
-
-    //images à afficher
-    @FXML
-    ImageView imageJoueur;
-    @FXML
-    ImageView imageWagons;
-    @FXML
-    ImageView imageGares;
-    @FXML
-    ImageView imageScore;
-
-    private ListChangeListener<IJoueur> changementAutresJoueursListener;
-    private IJoueur autreJoueur;
+    private ChangeListener<IJoueur> changementJoueurCourantListener;
 
     public VueAutresJoueurs() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/autresJoueurs.fxml"));
-            loader.setRoot(this);
-            loader.setController(this);
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void creerBindings(IJeu jeu){
-        changementAutresJoueursListener = elementChange -> Platform.runLater(() -> {
-            while (elementChange.next()) {
-                if (elementChange.wasUpdated()) {
-                    List<? extends IJoueur> listeUpdate = elementChange.getList();
-                    for(IJoueur joueur : listeUpdate){
-                        nomJoueur.setText(joueur.getNom());
-                        wagon.setText(String.valueOf(joueur.getNbWagons()));
-                        score.setText(String.valueOf(joueur.getScore()));
-                        gare.setText(String.valueOf(joueur.getNbGares()));
+        changementJoueurCourantListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {});
 
-                        imageJoueur.setImage(new Image("images/images/avatar-"+ joueur.getCouleur() + ".png"));
-                        imageGares.setImage(new Image("images/gares/gare-" + joueur.getCouleur() + ".png"));
-                        imageWagons.setImage(new Image("images/wagons/image-wagon-" + joueur.getCouleur() + ".png"));
-
-                    }
-                }
-
-            }
-        });
-
-        //jeu.joueurCourantProperty().addListener(changementAutresJoueursListener);
+        jeu.joueurCourantProperty().addListener(changementJoueurCourantListener);
     }
 
 }

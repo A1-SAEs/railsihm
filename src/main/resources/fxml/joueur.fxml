@@ -8,6 +8,8 @@
 
 <fx:root alignment="CENTER" prefHeight="127.0" prefWidth="200.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <VBox fx:id="destinationsJoueurCourant" prefHeight="200.0" prefWidth="100.0" />
+      <HBox fx:id="cartesJoueurCourant" prefHeight="100.0" prefWidth="200.0" />
       <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: grey;">
          <children>
             <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="139.0">

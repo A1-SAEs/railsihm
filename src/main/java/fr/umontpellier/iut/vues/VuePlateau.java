@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -33,7 +34,10 @@ public class VuePlateau extends Pane {
     }
 
     @FXML
-    public void choixRouteOuVille() {
+    public void choixRouteOuVille(MouseEvent event) {
+        Node id = (Node) event.getSource();
+        ((VueDuJeu) getScene().getRoot()).getJeu().uneVilleOuUneRouteAEteChoisie(id.getId());
+        System.out.println("test");
     }
 
     @FXML
@@ -51,8 +55,8 @@ public class VuePlateau extends Pane {
         bindRoutes();
         bindVilles();
         //Les dimensions de l'image varient avec celle de la scène
-        image.fitWidthProperty().bind(getScene().widthProperty());
-        image.fitHeightProperty().bind(getScene().heightProperty());
+        image.fitWidthProperty().bind(((Pane) getParent()).prefWidthProperty());
+        image.fitHeightProperty().bind(((Pane) getParent()).prefHeightProperty());
     }
 
     private void bindRectangle(Rectangle rect, double layoutX, double layoutY) {

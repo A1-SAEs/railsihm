@@ -23,7 +23,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Cette classe présente les éléments appartenant au joueur courant.
@@ -53,8 +55,10 @@ public class VueJoueurCourant extends HBox {
     ImageView imageScore;
 
     //Conteneurs de cartes
-    //HBox cartesJoueurCourant;
-    //VBox destinationsJoueurCourant;
+    @FXML
+    HBox cartesJoueurCourant;
+    @FXML
+    VBox destinationsJoueurCourant;
 
     //Listeners
     ChangeListener<IJoueur> changementJoueurCourantListener;
@@ -65,7 +69,7 @@ public class VueJoueurCourant extends HBox {
 
     public VueJoueurCourant(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/joueurCourant.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("fxml/joueur.fxml"));
             loader.setRoot(this);
             loader.setController(this);
             loader.load();
@@ -75,6 +79,7 @@ public class VueJoueurCourant extends HBox {
     }
 
     public void creerBindings(IJeu jeu){
+        Set<VueCarteWagon> cartes = new HashSet<>();
         joueurCourant = jeu.getJoueurs().get(0);
 
         changementJoueurCourantListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {
@@ -92,16 +97,20 @@ public class VueJoueurCourant extends HBox {
             //imageScore.setImage(new Image());
 
             //Nettoyage des cartes et destinations du joueur précédent
-            /*cartesJoueurCourant.getChildren().clear();
+            cartesJoueurCourant.getChildren().clear();
 
             //Mise en place des cartes et destinations du joueur actuel
-            for(CouleurWagon carteJoueur : nouvelleValeur.getCartesWagon()){
-                cartesJoueurCourant.getChildren().add(new Label(carteJoueur.name()));
+            /*for(ICouleurWagon carteJoueur : nouvelleValeur.getCartesWagon()){
+                cartes.add(new VueCarteWagon(carteJoueur));
+            }
+            cartesJoueurCourant.getChildren().addAll(cartes);
+            for(Node carte : cartesJoueurCourant.getChildren()){
+                ((VueCarteWagonJoueur) carte).setNombre(chopperLeNombreDeCartesDuJoueur);
             }
 
             destinationsJoueurCourant.getChildren().clear();
-            for(Destination destinationJoueur : nouvelleValeur.getDestinations()) {
-                destinationsJoueurCourant.getChildren().add(new Label(destinationJoueur.getNom()));
+            for(IDestination destinationJoueur : nouvelleValeur.getDestinations()) {
+                destinationsJoueurCourant.getChildren().add(new VueDestination(destinationJoueur));
             }*/
         });
 

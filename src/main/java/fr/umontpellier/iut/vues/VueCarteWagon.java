@@ -1,10 +1,8 @@
 package fr.umontpellier.iut.vues;
 
 import fr.umontpellier.iut.ICouleurWagon;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -30,6 +28,6 @@ public class VueCarteWagon extends ImageView {
 
     public void creerBindings(){
         setPreserveRatio(true);
-        fitWidthProperty().bind(((VBox) getParent()).prefWidthProperty());
+        fitWidthProperty().bind(((VBox) getParent()).prefWidthProperty().divide(2));
     }
 }
