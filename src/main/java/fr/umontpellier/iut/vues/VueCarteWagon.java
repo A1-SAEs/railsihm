@@ -28,6 +28,6 @@ public class VueCarteWagon extends ImageView {
 
     public void creerBindings(){
         setPreserveRatio(true);
-        fitWidthProperty().bind(((VBox) getParent()).prefWidthProperty().divide(2));
+        fitWidthProperty().bind(((VBox) getParent()).prefWidthProperty().divide(1.75));
     }
 }

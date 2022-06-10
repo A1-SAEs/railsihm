@@ -195,8 +195,8 @@ public class VueDuJeu extends HBox {
         conteneurPioches.prefHeightProperty().bind(prefHeightProperty());
 
         piocheCarte.setPreserveRatio(true);
-        piocheCarte.fitWidthProperty().bind(conteneurPioches.prefWidthProperty().divide(2));
-        piocheDestination.fitWidthProperty().bind(conteneurPioches.prefWidthProperty().divide(2));
+        piocheCarte.fitWidthProperty().bind(conteneurPioches.prefWidthProperty().divide(1.75));
+        piocheDestination.fitWidthProperty().bind(conteneurPioches.prefWidthProperty().divide(1.75));
         piocheDestination.setPreserveRatio(true);
         piocheVisible.prefWidthProperty().bind(conteneurPioches.prefWidthProperty());
 

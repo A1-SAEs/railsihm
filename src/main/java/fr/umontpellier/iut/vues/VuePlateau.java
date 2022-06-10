@@ -1,18 +1,28 @@
 package fr.umontpellier.iut.vues;
 
+import fr.umontpellier.iut.IJoueur;
+import fr.umontpellier.iut.IRoute;
+import fr.umontpellier.iut.IVille;
+import fr.umontpellier.iut.rails.Joueur;
+import javafx.application.Platform;
 import javafx.beans.binding.DoubleBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Cette classe présente les routes et les villes sur le plateau.
@@ -21,6 +31,9 @@ import java.io.IOException;
  * ainsi que les bindings qui mettront ?à jour le plateau après la prise d'une route ou d'une ville par un joueur
  */
 public class VuePlateau extends Pane {
+
+    ChangeListener<Joueur> changementProprioListener;
+    Node id;
 
     public VuePlateau() {
         try {
@@ -35,9 +48,8 @@ public class VuePlateau extends Pane {
 
     @FXML
     public void choixRouteOuVille(MouseEvent event) {
-        Node id = (Node) event.getSource();
+        id = (Node) event.getSource();
         ((VueDuJeu) getScene().getRoot()).getJeu().uneVilleOuUneRouteAEteChoisie(id.getId());
-        System.out.println("test");
     }
 
     @FXML
@@ -49,6 +61,29 @@ public class VuePlateau extends Pane {
 
     public void creerBindings() {
         bindRedimensionPlateau();
+
+        changementProprioListener = (observableValue, ancienneValeur, nouvelleValeur) ->  Platform.runLater(() -> {
+            if(id.getId().contains("-")){
+                for (Node rectangle : ((Group) id).getChildren()) {
+                    ((Shape) rectangle).setFill(Paint.valueOf(couleurJoueur(nouvelleValeur.getCouleur())));
+                }
+            }
+            else{
+                for(Node cercle : villes.getChildren()){
+                    if(cercle.getId().equals(id.getId())){
+                        ((Shape) cercle).setFill(Paint.valueOf(couleurJoueur(nouvelleValeur.getCouleur())));
+                    }
+                }
+            }
+        });
+
+        for(IVille ville : (List<IVille>)(((VueDuJeu) getScene().getRoot())).getJeu().getVilles()){
+            ville.proprietaireProperty().addListener(changementProprioListener);
+        }
+
+        for (IRoute route : (List<IRoute>)((VueDuJeu) getScene().getRoot()).getJeu().getRoutes()){
+            route.proprietaireProperty().addListener(changementProprioListener);
+        }
     }
 
     private void bindRedimensionPlateau() {
@@ -161,6 +196,16 @@ public class VuePlateau extends Pane {
                 return DonneesPlateau.rayonInitial * image.getLayoutBounds().getWidth() / DonneesPlateau.largeurInitialePlateau;
             }
         });
+    }
+
+    public static String couleurJoueur(IJoueur.Couleur couleur){
+        return switch (couleur){
+            case BLEU -> "blue";
+            case ROSE -> "purple";
+            case VERT -> "green";
+            case JAUNE -> "yellow";
+            case ROUGE -> "red";
+        };
     }
 
 }
