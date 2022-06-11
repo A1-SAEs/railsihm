@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -55,18 +56,21 @@ public class VueJoueurCourant extends HBox {
     @FXML
     private ImageView imageScore;
 
-    //Conteneurs de cartes
+    //Conteneurs
     @FXML
     private HBox cartesJoueurCourant;
     @FXML
-    private VBox destinationsJoueurCourant;
+    private StackPane destinationsJoueurCourant;
+    @FXML
+    private HBox conteneurJoueur;
 
     //Listeners
     private ChangeListener<IJoueur> changementJoueurCourantListener;
-    private ChangeListener<ICouleurWagon> changementCartesJoueursListener;
+    private ListChangeListener<CouleurWagon> changementCartesJoueursListener;
 
     //Joueur
     private IJoueur joueurCourant;
+    private Map<CouleurWagon, Integer> nombreCartesJoueur;
 
     public VueJoueurCourant(){
         try {
@@ -100,7 +104,7 @@ public class VueJoueurCourant extends HBox {
             cartesJoueurCourant.getChildren().clear();
             destinationsJoueurCourant.getChildren().clear();
 
-            Map<CouleurWagon, Integer> nombreCartesJoueur = CouleurWagon.compteur(nouvelleValeur.getCartesWagon());
+            nombreCartesJoueur = CouleurWagon.compteur(nouvelleValeur.getCartesWagon());
 
             //Mise en place des cartes et destinations du joueur actuel
             for(CouleurWagon carteJoueur : nouvelleValeur.getCartesWagon()){
@@ -114,17 +118,26 @@ public class VueJoueurCourant extends HBox {
                 }
             }
 
-            /*for(IDestination destinationJoueur : nouvelleValeur.getDestinations()) {
+            for(IDestination destinationJoueur : nouvelleValeur.getDestinations()) {
                 VueDestination destination = new VueDestination(destinationJoueur);
                 destinationsJoueurCourant.getChildren().add(destination);
-                destination.creerBindings();
-            }*/
+                destination.creerSPBindings();
+            }
+        });
+        changementCartesJoueursListener = elementChange -> Platform.runLater(() -> {
+          while(elementChange.next()){
+              if (elementChange.wasAdded()) {
+                  System.out.println("ajouté");
+              }
+              if(elementChange.wasRemoved()){
+                  System.out.println("supprimé");
+              }
+          }
         });
 
         jeu.joueurCourantProperty().addListener(changementJoueurCourantListener);
 
-        prefWidthProperty().bind(((VBox) getParent()).prefWidthProperty());
-        prefHeightProperty().bind(((VBox) getParent()).prefHeightProperty());
+        bindTailles();
     }
 
     public VueCarteWagonJoueur carteVersVue(ICouleurWagon carte) {
@@ -134,5 +147,16 @@ public class VueJoueurCourant extends HBox {
             }
         }
         return null;
+    }
+
+    public void bindTailles(){
+        prefWidthProperty().bind(((VBox) getParent()).prefWidthProperty());
+        prefHeightProperty().bind(((VBox) getParent()).prefHeightProperty());
+
+        conteneurJoueur.prefWidthProperty().bind(prefWidthProperty().multiply(0.20));
+        conteneurJoueur.prefHeightProperty().bind(prefHeightProperty().multiply(0.9));
+        destinationsJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.14));
+        cartesJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.66));
+        cartesJoueurCourant.prefHeightProperty().bind(prefHeightProperty().multiply(0.8));
     }
 }

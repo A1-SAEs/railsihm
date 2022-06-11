@@ -3,6 +3,7 @@ package fr.umontpellier.iut.vues;
 import fr.umontpellier.iut.IDestination;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -29,5 +30,10 @@ public class VueDestination extends ImageView {
     public void creerBindings(){
         setPreserveRatio(true);
         fitWidthProperty().bind(((VBox) getParent()).prefWidthProperty().divide(1.75));
+    }
+
+    public void creerSPBindings(){
+        setPreserveRatio(true);
+        fitWidthProperty().bind(((StackPane) getParent()).prefWidthProperty().divide(1.25));
     }
 }

@@ -5,6 +5,7 @@ import fr.umontpellier.iut.vues.VueChoixJoueurs;
 import fr.umontpellier.iut.vues.VueDuJeu;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.binding.DoubleBinding;
 import javafx.collections.ListChangeListener;
 import javafx.concurrent.Worker;
 import javafx.scene.Scene;
