@@ -17,29 +17,29 @@
 <?import javafx.scene.layout.Pane?>
 <fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <BorderPane style="-fx-background-color: white; -fx-border-color: black;" HBox.hgrow="ALWAYS">
+      <BorderPane minHeight="0" style="-fx-background-color: white; -fx-border-color: black;" HBox.hgrow="ALWAYS">
+         <center>
+            <Pane fx:id="conteneurPlateau" style="-fx-background-color: green; -fx-border-color: black;">
+               <children>
+                  <VuePlateau fx:id="plateau"/>
+               </children>
+            </Pane>
+         </center>
          <left>
-            <VBox fx:id="conteneurAutresJoueurs" alignment="BOTTOM_LEFT" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: blue; -fx-border-color: black;" BorderPane.alignment="CENTER">
+            <VBox fx:id="conteneurAutresJoueurs" alignment="BOTTOM_LEFT" style="-fx-background-color: blue; -fx-border-color: black;" BorderPane.alignment="CENTER">
                <children>
                   <VBox fx:id="destinationsInitiales" prefHeight="200.0" prefWidth="100.0" />
                </children>
             </VBox>
          </left>
          <bottom>
-            <VBox fx:id="conteneurJoueurCourant" alignment="CENTER" prefHeight="97.0" prefWidth="488.0" BorderPane.alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-border-color: black;">
+            <VBox fx:id="conteneurJoueurCourant" alignment="CENTER" BorderPane.alignment="BOTTOM_CENTER" style="-fx-background-color: pink; -fx-border-color: black;">
                <children>
                   <Label fx:id="instructions"/>
                   <VueJoueurCourant fx:id="vueJoueurCourant"/>
                </children>
             </VBox>
          </bottom>
-         <center>
-            <Pane fx:id="conteneurPlateau" style="-fx-background-color: green; -fx-border-color: black;">
-            <children>
-               <VuePlateau fx:id="plateau"/>
-            </children>
-            </Pane>
-         </center>
       </BorderPane>
       <VBox fx:id="conteneurPioches" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" style="-fx-background-color: red; -fx-border-color: black;" >
          <children>

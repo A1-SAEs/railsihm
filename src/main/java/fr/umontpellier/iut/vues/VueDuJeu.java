@@ -33,13 +33,13 @@ import java.util.List;
 public class VueDuJeu extends HBox {
     //Conteneurs du jeu
     @FXML
-    VBox conteneurPioches;
+    private VBox conteneurPioches;
     @FXML
-    VBox conteneurAutresJoueurs;
+    private VBox conteneurAutresJoueurs;
     @FXML
-    VBox conteneurJoueurCourant;
+    private VBox conteneurJoueurCourant;
     @FXML
-    Pane conteneurPlateau;
+    private Pane conteneurPlateau;
 
     //Vues
     private IJeu jeu;
@@ -53,13 +53,13 @@ public class VueDuJeu extends HBox {
     //Instructions
     private ChangeListener<String> instructionsListener;
     @FXML
-    Label instructions;
+    private Label instructions;
 
     //Pioches
     @FXML
-    ImageView piocheCarte;
+    private ImageView piocheCarte;
     @FXML
-    ImageView piocheDestination;
+    private ImageView piocheDestination;
 
     //Pioche visible
     private ListChangeListener<CouleurWagon> piocheVisibleListener;
@@ -189,7 +189,7 @@ public class VueDuJeu extends HBox {
         prefWidthProperty().bind(getScene().getWindow().widthProperty());
 
         conteneurPlateau.prefWidthProperty().bind(prefWidthProperty().multiply(0.68));
-        conteneurPlateau.prefHeightProperty().bind(prefHeightProperty().multiply(0.8));
+        conteneurPlateau.prefHeightProperty().bind(prefHeightProperty().multiply(0.85));
 
         conteneurPioches.prefWidthProperty().bind(prefWidthProperty().multiply(0.15));
         conteneurPioches.prefHeightProperty().bind(prefHeightProperty());
@@ -204,7 +204,7 @@ public class VueDuJeu extends HBox {
         conteneurAutresJoueurs.prefHeightProperty().bind(prefHeightProperty().multiply(0.8));
 
         conteneurJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.85));
-        conteneurJoueurCourant.prefHeightProperty().bind(prefHeightProperty().multiply(0.2));
+        conteneurJoueurCourant.prefHeightProperty().bind(prefHeightProperty().multiply(0.15));
 
         destinationsInitiales.prefWidthProperty().bind(conteneurAutresJoueurs.prefWidthProperty());
     }

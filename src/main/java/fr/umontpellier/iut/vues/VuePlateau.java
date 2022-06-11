@@ -32,8 +32,8 @@ import java.util.List;
  */
 public class VuePlateau extends Pane {
 
-    ChangeListener<Joueur> changementProprioListener;
-    Node id;
+    private ChangeListener<Joueur> changementProprioListener;
+    private Node id;
 
     public VuePlateau() {
         try {
@@ -90,6 +90,7 @@ public class VuePlateau extends Pane {
         bindRoutes();
         bindVilles();
         //Les dimensions de l'image varient avec celle de la scène
+        image.setPreserveRatio(true);
         image.fitWidthProperty().bind(((Pane) getParent()).prefWidthProperty());
         image.fitHeightProperty().bind(((Pane) getParent()).prefHeightProperty());
     }
