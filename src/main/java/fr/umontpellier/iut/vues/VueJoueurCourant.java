@@ -149,14 +149,21 @@ public class VueJoueurCourant extends HBox {
         return null;
     }
 
+    @FXML
+    public void switchDestination(){
+        if(destinationsJoueurCourant.getChildren().size()>1){
+            destinationsJoueurCourant.getChildren().get(destinationsJoueurCourant.getChildren().size()-1).toBack();
+        }
+    }
+
     public void bindTailles(){
         prefWidthProperty().bind(((VBox) getParent()).prefWidthProperty());
         prefHeightProperty().bind(((VBox) getParent()).prefHeightProperty());
 
         conteneurJoueur.prefWidthProperty().bind(prefWidthProperty().multiply(0.20));
         conteneurJoueur.prefHeightProperty().bind(prefHeightProperty().multiply(0.9));
-        destinationsJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.14));
-        cartesJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.66));
+        destinationsJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.18));
+        cartesJoueurCourant.prefWidthProperty().bind(prefWidthProperty().multiply(0.62));
         cartesJoueurCourant.prefHeightProperty().bind(prefHeightProperty().multiply(0.8));
     }
 }

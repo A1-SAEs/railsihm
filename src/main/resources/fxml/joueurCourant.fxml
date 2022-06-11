@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="CENTER" prefHeight="127.0" prefWidth="200.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="CENTER" prefHeight="127.0" prefWidth="200.0" type="HBox" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane fx:id="destinationsJoueurCourant" alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-padding: 0 0 20 0;" />
-      <HBox fx:id="cartesJoueurCourant" alignment="BOTTOM_CENTER" style="-fx-padding: 0 0 60 0;" />
-      <HBox fx:id="conteneurJoueur" alignment="BOTTOM_CENTER" prefHeight="141.0" prefWidth="124.0" style="-fx-background-color: grey; -fx-padding: 0 0 20 20; -fx-background-radius: 10;">
+      <StackPane fx:id="destinationsJoueurCourant" onMouseClicked="#switchDestination" alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-padding: 0 0 8 0;" />
+      <HBox fx:id="cartesJoueurCourant" alignment="BOTTOM_CENTER" style="-fx-padding: 0 0 50 0;" />
+      <HBox fx:id="conteneurJoueur" alignment="BOTTOM_CENTER" prefHeight="141.0" prefWidth="124.0" style="-fx-background-color: grey; -fx-padding: 0 0 15 20; -fx-background-radius: 10;">
          <children>
             <VBox prefHeight="100.0" prefWidth="139.0">
                <children>

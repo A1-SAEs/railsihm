@@ -9,12 +9,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <?import fr.umontpellier.iut.vues.VueJoueurCourant?>
 <?import fr.umontpellier.iut.vues.VuePlateau?>
 <!--<?import fr.umontpellier.iut.vues.VueAutresJoueurs?>-->
 
-<fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane" minHeight="0" style="-fx-background-color: white; -fx-border-color: black;" HBox.hgrow="ALWAYS">
          <center>
@@ -34,7 +35,16 @@
          <bottom>
             <VBox fx:id="conteneurJoueurCourant" alignment="CENTER_LEFT" style="-fx-background-color: pink; -fx-border-color: black;" BorderPane.alignment="BOTTOM_CENTER">
                <children>
-                  <Label fx:id="instructions" />
+                  <Label fx:id="instructions" style="-fx-background-color: white; -fx-background-radius: 5;">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="5.0" right="5.0" />
+                     </padding></Label>
                   <VueJoueurCourant fx:id="vueJoueurCourant"/>
                </children>
             </VBox>
