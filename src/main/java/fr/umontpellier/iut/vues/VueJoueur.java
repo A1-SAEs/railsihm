@@ -1,11 +1,37 @@
 package fr.umontpellier.iut.vues;
 
+import fr.umontpellier.iut.IJeu;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
 public class VueJoueur extends HBox {
+
+    //Affichages labels
+    @FXML
+    private Label nomJoueur;
+    @FXML
+    private Label wagonsJoueur;
+    @FXML
+    private Label scoreJoueur;
+    @FXML
+    private Label garesJoueur;
+
+    //Affichages images
+    @FXML
+    private ImageView imageJoueur;
+    @FXML
+    private ImageView imageWagons;
+    @FXML
+    private ImageView imageGares;
+    @FXML
+    private ImageView imageScore;
+
+
 
     public VueJoueur(){
         try {
@@ -16,6 +42,10 @@ public class VueJoueur extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void creerBindings(IJeu jeu){
+        System.out.println("oui");
     }
 
 }

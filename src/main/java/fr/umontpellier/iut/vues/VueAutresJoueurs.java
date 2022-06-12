@@ -1,8 +1,7 @@
 package fr.umontpellier.iut.vues;
 
 import fr.umontpellier.iut.IJeu;
-import fr.umontpellier.iut.IJoueur;
-import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 /**
@@ -14,13 +13,16 @@ import javafx.scene.layout.VBox;
 public class VueAutresJoueurs extends VBox {
 
     public VueAutresJoueurs(IJeu jeu) {
-       for(int i=0; i<jeu.getJoueurs().size();i++){
+       for(int i=0; i<jeu.getJoueurs().size()-1;i++){
            getChildren().add(new VueJoueur());
        }
        setSpacing(5);
     }
 
     public void creerBindings(IJeu jeu){
+        for(Node child : getChildren()){
+            ((VueJoueur) child).creerBindings(jeu);
+        }
     }
 
 }

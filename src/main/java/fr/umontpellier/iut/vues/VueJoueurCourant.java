@@ -40,7 +40,7 @@ public class VueJoueurCourant extends HBox {
     @FXML
     private Label nomJoueur;
     @FXML
-    private Label wagonJoueur;
+    private Label wagonsJoueur;
     @FXML
     private Label scoreJoueur;
     @FXML
@@ -89,7 +89,7 @@ public class VueJoueurCourant extends HBox {
             nouvelleValeur.cartesWagonProperty().addListener(changementCartesJoueursListener);
             //Changement des labels du joueur
             nomJoueur.setText(nouvelleValeur.getNom());
-            wagonJoueur.setText(String.valueOf(nouvelleValeur.getNbWagons()));
+            wagonsJoueur.setText(String.valueOf(nouvelleValeur.getNbWagons()));
             scoreJoueur.setText(String.valueOf(nouvelleValeur.getScore()));
             garesJoueur.setText(String.valueOf(nouvelleValeur.getNbGares()));
 

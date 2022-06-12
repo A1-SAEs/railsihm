@@ -167,7 +167,7 @@ public class VueDuJeu extends HBox {
         //Création des bindings
         plateau.creerBindings();
         vueJoueurCourant.creerBindings(this.getJeu());
-
+        vueAutresJoueurs.creerBindings(this.getJeu());
         conteneurAutresJoueurs.getChildren().add(vueAutresJoueurs);
     }
 
