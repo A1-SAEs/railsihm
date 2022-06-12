@@ -138,18 +138,16 @@ public class VueJoueurCourant extends HBox {
                           cartesJoueurCourant.getChildren().add(nouvelleCarte);
                           nouvelleCarte.creerBindings();
                       }
-                      System.out.println("ajouté");
                   }
               }
               else if(elementChange.wasRemoved()){
-                  for(CouleurWagon carte : elementChange.getAddedSubList()) {
+                  for(CouleurWagon carte : elementChange.getRemoved()) {
                       if(cartesJoueurCourant.getChildren().contains(carteVersVue(carte))){
                           carteVersVue(carte).setNombre(nombreCartesJoueur.get(carte));
                       }
                       else{
                           cartesJoueurCourant.getChildren().remove(carteVersVue(carte));
                       }
-                      System.out.println("supprimé");
                   }
               }
           }
