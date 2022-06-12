@@ -6,6 +6,7 @@ import fr.umontpellier.iut.IJeu;
 import fr.umontpellier.iut.IJoueur;
 import fr.umontpellier.iut.rails.CouleurWagon;
 import fr.umontpellier.iut.rails.Destination;
+import fr.umontpellier.iut.rails.Joueur;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.ListChangeListener;
@@ -86,7 +87,6 @@ public class VueJoueurCourant extends HBox {
     public void creerBindings(IJeu jeu){
 
         changementJoueurCourantListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {
-            nouvelleValeur.cartesWagonProperty().addListener(changementCartesJoueursListener);
             //Changement des labels du joueur
             nomJoueur.setText(nouvelleValeur.getNom());
             wagonsJoueur.setText(String.valueOf(nouvelleValeur.getNbWagons()));
@@ -123,6 +123,7 @@ public class VueJoueurCourant extends HBox {
                 destination.creerSPBindings();
             }
         });
+
         changementCartesJoueursListener = elementChange -> Platform.runLater(() -> {
           while(elementChange.next()){
               nombreCartesJoueur = CouleurWagon.compteur(jeu.joueurCourantProperty().getValue().getCartesWagon()); //Compte le nombre de cartes de chaque couleur du joueur
@@ -153,6 +154,10 @@ public class VueJoueurCourant extends HBox {
               }
           }
         });
+
+        for(Joueur joueur : jeu.getJoueurs()){
+            joueur.cartesWagonProperty().addListener(changementCartesJoueursListener);
+        }
 
         jeu.joueurCourantProperty().addListener(changementJoueurCourantListener);
 
