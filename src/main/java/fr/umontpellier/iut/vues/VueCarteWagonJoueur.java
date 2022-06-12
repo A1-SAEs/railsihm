@@ -1,6 +1,7 @@
 package fr.umontpellier.iut.vues;
 
 import fr.umontpellier.iut.ICouleurWagon;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -47,8 +48,10 @@ public class VueCarteWagonJoueur extends StackPane {
     }
 
     public void setNombre(int nombre){
-        this.nombre = nombre;
-        labelNombre.setText(String.valueOf(nombre));
+        Platform.runLater(() -> {
+            this.nombre = nombre;
+            labelNombre.setText(String.valueOf(nombre));
+        });
     }
 
     public ICouleurWagon getCouleurWagon() {

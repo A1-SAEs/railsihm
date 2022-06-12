@@ -38,11 +38,13 @@ public class VueDuJeu extends HBox {
     @FXML
     private VBox conteneurPioches;
     @FXML
-    private VBox conteneurAutresJoueurs;
+    private VBox conteneurLeft;
     @FXML
     private VBox conteneurJoueurCourant;
     @FXML
     private Pane conteneurPlateau;
+    @FXML
+    private Pane conteneurAutresJoueurs;
 
     //Vues
     private IJeu jeu;
@@ -50,7 +52,7 @@ public class VueDuJeu extends HBox {
     private VuePlateau plateau;
     @FXML
     private VueJoueurCourant vueJoueurCourant;
-    @FXML
+
     private VueAutresJoueurs vueAutresJoueurs;
 
     //Instructions
@@ -90,6 +92,7 @@ public class VueDuJeu extends HBox {
         this.jeu = jeu;
 
         boutonPasser = new Button("Passer");
+        vueAutresJoueurs = new VueAutresJoueurs(this.getJeu());
     }
 
     public IJeu getJeu() {
@@ -162,9 +165,10 @@ public class VueDuJeu extends HBox {
         jeu.cartesWagonVisiblesProperty().addListener(piocheVisibleListener);
 
         //Création des bindings
-        //vueAutresJoueurs.creerBindings(this.getJeu());
         plateau.creerBindings();
         vueJoueurCourant.creerBindings(this.getJeu());
+
+        conteneurAutresJoueurs.getChildren().add(vueAutresJoueurs);
     }
 
     //Recherche d'une destination en sa vue correspondante
@@ -206,12 +210,14 @@ public class VueDuJeu extends HBox {
         conteneurPlateau.prefWidthProperty().bind(borderPane.prefWidthProperty().multiply(0.785));
         conteneurPlateau.prefHeightProperty().bind(borderPane.prefHeightProperty().multiply(0.79));
 
-        conteneurAutresJoueurs.prefWidthProperty().bind(borderPane.prefWidthProperty().multiply(0.215));
-        conteneurAutresJoueurs.prefHeightProperty().bind(borderPane.prefHeightProperty().multiply(0.79));
+        conteneurLeft.prefWidthProperty().bind(borderPane.prefWidthProperty().multiply(0.215));
+        conteneurLeft.prefHeightProperty().bind(borderPane.prefHeightProperty().multiply(0.79));
+
+        conteneurAutresJoueurs.prefHeightProperty().bind(conteneurLeft.prefHeightProperty().multiply(0.7));
+        destinationsInitiales.prefWidthProperty().bind(conteneurPioches.prefWidthProperty());
 
         conteneurJoueurCourant.prefWidthProperty().bind(borderPane.prefWidthProperty());
         conteneurJoueurCourant.prefHeightProperty().bind(borderPane.prefHeightProperty().multiply(0.175));
 
-        destinationsInitiales.prefWidthProperty().bind(conteneurPioches.prefWidthProperty());
     }
 }

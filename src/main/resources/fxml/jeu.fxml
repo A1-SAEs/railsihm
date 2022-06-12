@@ -13,8 +13,8 @@
 
 <?import fr.umontpellier.iut.vues.VueJoueurCourant?>
 <?import fr.umontpellier.iut.vues.VuePlateau?>
-<!--<?import fr.umontpellier.iut.vues.VueAutresJoueurs?>-->
 
+<?import fr.umontpellier.iut.vues.VueAutresJoueurs?>
 <fx:root alignment="BOTTOM_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="432.0" prefWidth="600.0" type="HBox" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane fx:id="borderPane" minHeight="0" style="-fx-background-color: white; -fx-border-color: black;" HBox.hgrow="ALWAYS">
@@ -26,9 +26,10 @@
             </Pane>
          </center>
          <left>
-            <VBox fx:id="conteneurAutresJoueurs" alignment="BOTTOM_LEFT" style="-fx-background-color: blue; -fx-border-color: black;" BorderPane.alignment="CENTER">
+            <VBox fx:id="conteneurLeft" alignment="TOP_CENTER" style="-fx-background-color: blue; -fx-border-color: black;" BorderPane.alignment="CENTER">
                <children>
-                  <VBox fx:id="destinationsInitiales" prefHeight="200.0" prefWidth="100.0" />
+                  <Pane fx:id="conteneurAutresJoueurs"/>
+                  <VBox fx:id="destinationsInitiales" alignment="CENTER" style="-fx-padding: 0 0 20 0;" prefHeight="200.0" prefWidth="100.0" />
                </children>
             </VBox>
          </left>

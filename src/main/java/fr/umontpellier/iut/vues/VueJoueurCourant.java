@@ -84,10 +84,9 @@ public class VueJoueurCourant extends HBox {
     }
 
     public void creerBindings(IJeu jeu){
-        joueurCourant = jeu.getJoueurs().get(0);
 
         changementJoueurCourantListener = (observableValue, ancienneValeur, nouvelleValeur) -> Platform.runLater(() -> {
-            joueurCourant = nouvelleValeur;
+            nouvelleValeur.cartesWagonProperty().addListener(changementCartesJoueursListener);
             //Changement des labels du joueur
             nomJoueur.setText(nouvelleValeur.getNom());
             wagonJoueur.setText(String.valueOf(nouvelleValeur.getNbWagons()));
@@ -126,11 +125,31 @@ public class VueJoueurCourant extends HBox {
         });
         changementCartesJoueursListener = elementChange -> Platform.runLater(() -> {
           while(elementChange.next()){
+              nombreCartesJoueur = CouleurWagon.compteur(jeu.joueurCourantProperty().getValue().getCartesWagon());
+
               if (elementChange.wasAdded()) {
-                  System.out.println("ajouté");
+                  for(CouleurWagon carte : elementChange.getAddedSubList()) {
+                      if(cartesJoueurCourant.getChildren().contains(carteVersVue(carte))){
+                          carteVersVue(carte).setNombre(nombreCartesJoueur.get(carte));
+                      }
+                      else{
+                          VueCarteWagonJoueur nouvelleCarte = new VueCarteWagonJoueur(carte, nombreCartesJoueur.get(carte));
+                          cartesJoueurCourant.getChildren().add(nouvelleCarte);
+                          nouvelleCarte.creerBindings();
+                      }
+                      System.out.println("ajouté");
+                  }
               }
-              if(elementChange.wasRemoved()){
-                  System.out.println("supprimé");
+              else if(elementChange.wasRemoved()){
+                  for(CouleurWagon carte : elementChange.getAddedSubList()) {
+                      if(cartesJoueurCourant.getChildren().contains(carteVersVue(carte))){
+                          carteVersVue(carte).setNombre(nombreCartesJoueur.get(carte));
+                      }
+                      else{
+                          cartesJoueurCourant.getChildren().remove(carteVersVue(carte));
+                      }
+                      System.out.println("supprimé");
+                  }
               }
           }
         });
