@@ -19,7 +19,7 @@ public class VueCarteWagon extends ImageView {
         this.setOnMouseClicked(event -> {
             ((VueDuJeu) getScene().getRoot()).getJeu().uneCarteWagonAEteChoisie(couleurWagon);
         });
-        setImage(new Image("images/cartesWagons/carte-wagon-" + couleurWagon + ".png"));
+        setImage(new Image("images/cartesWagons/carte-wagon-" + couleurWagon.toString().toUpperCase() + ".png"));
     }
 
     public ICouleurWagon getCouleurWagon() {

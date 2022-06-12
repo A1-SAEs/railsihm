@@ -125,15 +125,15 @@ public class VueJoueurCourant extends HBox {
         });
         changementCartesJoueursListener = elementChange -> Platform.runLater(() -> {
           while(elementChange.next()){
-              nombreCartesJoueur = CouleurWagon.compteur(jeu.joueurCourantProperty().getValue().getCartesWagon());
+              nombreCartesJoueur = CouleurWagon.compteur(jeu.joueurCourantProperty().getValue().getCartesWagon()); //Compte le nombre de cartes de chaque couleur du joueur
 
               if (elementChange.wasAdded()) {
                   for(CouleurWagon carte : elementChange.getAddedSubList()) {
-                      if(cartesJoueurCourant.getChildren().contains(carteVersVue(carte))){
-                          carteVersVue(carte).setNombre(nombreCartesJoueur.get(carte));
+                      if(cartesJoueurCourant.getChildren().contains(carteVersVue(carte))){ //Si l'affichage contient déjà une carte de cette couleur
+                          carteVersVue(carte).setNombre(nombreCartesJoueur.get(carte)); //On met à jour son nombre
                       }
                       else{
-                          VueCarteWagonJoueur nouvelleCarte = new VueCarteWagonJoueur(carte, nombreCartesJoueur.get(carte));
+                          VueCarteWagonJoueur nouvelleCarte = new VueCarteWagonJoueur(carte, nombreCartesJoueur.get(carte)); //On ajoute l'affichage de la carte
                           cartesJoueurCourant.getChildren().add(nouvelleCarte);
                           nouvelleCarte.creerBindings();
                       }

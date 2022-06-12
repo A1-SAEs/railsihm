@@ -20,7 +20,7 @@ public class VueDestination extends ImageView {
         this.setOnMouseClicked(event -> {
             ((VueDuJeu) getScene().getRoot()).getJeu().uneDestinationAEteChoisie(destination.getNom());
         });
-        setImage(new Image("images/missions/eu-" + destination.getNom().replaceAll("[[^\\-]&&\\P{L}]", "") +".png"));
+        setImage(new Image("images/missions/eu-" + (destination.getNom().replaceAll("[[^\\-]&&\\P{L}]", "")).toLowerCase() +".png"));
     }
 
     public IDestination getDestination() {

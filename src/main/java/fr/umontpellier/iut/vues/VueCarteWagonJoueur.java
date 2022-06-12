@@ -43,7 +43,7 @@ public class VueCarteWagonJoueur extends StackPane {
             ((VueDuJeu) getScene().getRoot()).getJeu().uneCarteWagonAEteChoisie(couleurWagon);
         });
 
-        imageCarte.setImage((new Image("images/cartesWagons/carte-wagon-" + couleurWagon + ".png")));
+        imageCarte.setImage((new Image("images/cartesWagons/carte-wagon-" + couleurWagon.toString().toUpperCase() + ".png")));
         labelNombre.setText(String.valueOf(nombre));
     }
 
