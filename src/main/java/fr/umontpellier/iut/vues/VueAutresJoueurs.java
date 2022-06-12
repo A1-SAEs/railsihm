@@ -2,6 +2,7 @@ package fr.umontpellier.iut.vues;
 
 import fr.umontpellier.iut.IJeu;
 import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /**
@@ -23,6 +24,7 @@ public class VueAutresJoueurs extends VBox {
         for(Node child : getChildren()){
             ((VueJoueur) child).creerBindings(jeu);
         }
+        prefWidthProperty().bind(((Pane) getParent()).prefWidthProperty());
     }
 
 }
