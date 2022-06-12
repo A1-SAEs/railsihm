@@ -194,8 +194,8 @@ public class VueDuJeu extends HBox {
 
     public void bindTailles() {
 
-        setPrefWidth(Screen.getPrimary().getBounds().getWidth()*0.75);
-        setPrefHeight(Screen.getPrimary().getBounds().getHeight()*0.75);
+        setPrefWidth(Screen.getPrimary().getBounds().getWidth()*0.85);
+        setPrefHeight(Screen.getPrimary().getBounds().getHeight()*0.85);
 
         //Partie gauche et partie droite
         borderPane.prefWidthProperty().bind(prefWidthProperty().multiply(0.85));
