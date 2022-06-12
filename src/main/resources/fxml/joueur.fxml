@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root fx:id="conteneurJoueur" alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="366.0" style="-fx-background-color: grey; -fx-padding: 0 0 15 20; -fx-background-radius: 10;" type="HBox" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root fx:id="conteneurJoueur" alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="366.0" style="-fx-background-color: #A8A3A3; -fx-padding: 0 0 15 20; -fx-background-radius: 10; -fx-border-color: black" type="HBox" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox alignment="CENTER" prefHeight="117.0" prefWidth="75.0">
          <children>

@@ -46,6 +46,7 @@ public class VueJoueur extends HBox {
     }
 
     public void creerBindings(IJeu jeu){
+
         prefWidthProperty().bind(((VBox) getParent()).prefWidthProperty());
     }
 
