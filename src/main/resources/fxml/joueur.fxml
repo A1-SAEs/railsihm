@@ -11,7 +11,7 @@
       <VBox alignment="CENTER" prefHeight="117.0" prefWidth="75.0">
          <children>
             <ImageView fx:id="imageJoueur" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="nomJoueur" text="Label" />
+            <Label fx:id="nomJoueur" style="-fx-background-color: #E9E9E9; -fx-background-radius: 10;" textAlignment="CENTER"/>
          </children>
       </VBox>
       <VBox prefHeight="73.0" prefWidth="264.0">
